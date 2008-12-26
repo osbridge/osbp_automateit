@@ -6,16 +6,16 @@ require "automateit"
 # Include Interpreter's methods into Rake session.
 @interpreter.include_in(self)
 
-task :default => :shell
+task :default => :all
 
 desc "Interactive AutomateIt shell"
 task :shell do
   AutomateIt::CLI.run
 end
 
-desc "Run a recipe"
-task :hello do
-  invoke "hello"
+desc "Run recipes"
+task :all do
+  invoke "all"
 end
 
 desc "Preview action, e.g, 'rake preview hello'"
