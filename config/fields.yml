@@ -1,0 +1,31 @@
+# Put your fields here
+
+#-----------------------------------------------------------------------
+#
+# == FIELDS
+#
+# This is an AutomateIt fields file. Fields are useful for extracting
+# configuration-specific arguments out of your recipe logic, and making
+# them easier to share between recipes and access from other programs.
+#
+# For example, declare fields using YAML:
+#
+#   foo: bar
+#   mydaemon:
+#     mykey: myvalue
+#
+# And retrieve field values from a recipe:
+#
+#   lookup("foo") # => "bar"
+#   lookup("mydaemon") # => {"mykey" => "myvalue"}
+#   lookup("mydaemon#mykey") # => "myvalue"
+#
+# You may use ERB statements within this file. Because this file is
+# loaded after the tags, you can use ERB to dynamically set fields for
+# specific groups of hosts, e.g.:
+#
+#   magical: <%= tagged?("magical_hosts") ? true : false %>
+#
+# See AutomateIt::FieldManager for further details.
+#
+#-----------------------------------------------------------------------

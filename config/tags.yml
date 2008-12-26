@@ -1,0 +1,39 @@
+# Put your roles here
+
+#-----------------------------------------------------------------------
+#
+# == TAGS
+#
+# This is an AutomateIt tags file. Use it to assign tags to hosts so you
+# can manage multiple hosts as a group.
+#
+# For example, in this file assign the tag "myrole" to two computers
+# named "host1" and "host2":
+#
+#     myrole:
+#       - host1
+#       - host2
+#
+# Then check from a recipe if this host has this tag:
+#
+#     if tagged?("myrole")
+#       # Code will only run if this host is tagged with "myrole"
+#     end
+#
+# You can also retrieve tags:
+#
+#     puts "Tags for this host: #{tags.inspect}"
+#     # => ["myrole"]
+#     puts "Tags for a specific host: #{tags_for("host1").inspect}"
+#     # => ["myrole"]
+#     puts "Hosts with a tag: #{hosts_tagged_with("myrole").inspect}"
+#     # => ["host1", "host2"]
+#
+# You will likely see additional tags which are automatically added
+# based on the host's operating system, architecture, hostnames, etc.
+#
+# You may use ERB statements within this file.
+#
+# See AutomateIt::TagManager for further details.
+#
+#-----------------------------------------------------------------------
