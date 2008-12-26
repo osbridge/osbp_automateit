@@ -1,0 +1,21 @@
+set daemon 60 # Seconds between polls
+set logfile /var/log/monit.log
+set alert root@localhost
+
+set httpd port 2812 and use address localhost
+    allow localhost
+    allow admin:monit
+
+check system localhost
+    if loadavg(1m) > 4 then alert
+    if loadavg(5m) > 2 then alert
+    if memory usage > 90% then exec "/usr/bin/top -b -n1 | /usr/bin/mail -s 'Available memory too low' root"
+
+check device rootfs with path /
+    if space usage > 85% then alert
+
+check host google with address localhost
+    if failed url
+        http://google.org/
+        and content == "Google"
+        then alert
