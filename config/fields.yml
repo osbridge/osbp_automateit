@@ -1,5 +1,9 @@
 # Put your fields here
 timezone: "America/Los_Angeles"
+exim:
+  aliases:
+    root: "igal+root@pragmaticraft.com"
+    igal: "igal@pragmaticraft.com"
 
 #-----------------------------------------------------------------------
 #
