@@ -14,7 +14,9 @@ invoke 'base_logwatch'
 invoke 'base_fail2ban'
 invoke 'base_ssh_gateway'
 invoke 'base_exim'
-#TODO invoke 'base_python'
+invoke 'base_python_easy_install'
+
+# Base services
 #TODO invoke 'base_monit'
 #TODO invoke 'base_apache'
 #TODO invoke 'base_ruby_enterprise'
