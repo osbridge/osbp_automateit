@@ -21,7 +21,8 @@ modified |= \
 
 # Run service
 if modified
-  if pmatch? :name => :monit
+  #IK# if pmatch? :name => :monit
+  if not `ps -ef | grep monit| grep -v grep`.blank?
     service_manager.tell :monit, "force-reload"
   else
     service_manager.start :monit
