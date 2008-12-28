@@ -11,7 +11,7 @@ class ::PostgreSQLSetup
     require 'dbi'
 
     @interpreter = opts[:interpreter] or raise ArgumentError.new(":interpreter not specified")
-    @interpreter.include_in(self, %w(writing? sh preview? log))
+    @interpreter.include_in(self, %w[writing? sh preview? log])
     @default_db = opts[:default_db] || "template1"
     @dba = opts[:dba] || "postgres"
   end
@@ -34,7 +34,7 @@ class ::PostgreSQLSetup
       tried = false
       return connect
     rescue DBI::OperationalError => e
-      sh %q(echo "create user %s with superuser;" | su - %s -- psql -d %s) % ["root", dba, default_db]
+      sh %q(echo "create user #{root} with superuser;" | su - #{dba} -- psql -d #{default_db})
       if preview?
         log.info(PNOTE+"Granting superuser rights to root")
         return false
@@ -97,26 +97,26 @@ class ::PostgreSQLSetup
     return false if user? user
     sql = "create user #{user}"
     sql << " password '#{opts[:password]}'" if opts[:password]
-    log.info PNOTE+"Added PostgreSQL user: %s" % user
+    log.info PNOTE+"Added PostgreSQL user: #{user}"
     fetch sql if writing?
   end
 
   def remove_user(user)
     return false unless user? user
-    log.info PNOTE+"Removed PostgreSQL user: %s" % user
-    fetch "drop user %s" % user if writing?
+    log.info PNOTE+"Removed PostgreSQL user: #{user}"
+    fetch "drop user #{user}" if writing?
   end
 
   def grant_superuser(user)
     return false if superuser? user
-    log.info PNOTE+"Granted superuser rights to PostgreSQL user: %s" % user
-    fetch "alter user %s createuser" % user if writing?
+    log.info PNOTE+"Granted superuser rights to PostgreSQL user: #{user}"
+    fetch "alter user #{user} createuser" if writing?
   end
 
   def revoke_superuser(user)
     return false unless superuser? user
-    log.info PNOTE+"Revoked superuser rights from PostgreSQL user: %s" % user
-    fetch "alter user %s nocreateuser" % user if writing?
+    log.info PNOTE+"Revoked superuser rights from PostgreSQL user: #{user}"
+    fetch "alter user #{user} nocreateuser" if writing?
   end
 
   def language?(language)
@@ -125,13 +125,13 @@ class ::PostgreSQLSetup
   end
 
   def add_language(language)
-    log.info PNOTE+"Added PostgreSQL language: %s" % user
-    fetch "create language %s" % language if writing?
+    log.info PNOTE+"Added PostgreSQL language: #{language}"
+    fetch "create language #{language}" if writing?
   end
 
   def remove_language(language)
-    log.info PNOTE+"Removed PostgreSQL language: %s" % user
-    fetch "drop language %s" % language if writing?
+    log.info PNOTE+"Removed PostgreSQL language: #{language}"
+    fetch "drop language #{language}" if writing?
   end
 end
 
