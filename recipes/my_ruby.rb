@@ -1,6 +1,9 @@
-# Setup common Ruby packages
+# Setup custom Ruby packages
 
 package_manager.install <<-HERE, :with => :gem, :docs => false
+  facets
+  fiveruns-memcache-client
+  memcache-client
   ruby-debug
 HERE
 
