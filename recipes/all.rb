@@ -21,6 +21,7 @@ invoke 'base_revision_control'
 invoke 'base_compilers_and_interpreters'
 invoke 'base_package_managers'
 invoke 'base_python_easy_install'
+invoke 'base_java'
 
 # Base services
 invoke 'base_shmem'
