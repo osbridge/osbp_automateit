@@ -11,6 +11,7 @@ invoke 'base_firewall'
 invoke 'base_fail2ban'
 invoke 'base_ssh_gateway'
 invoke 'base_logwatch'
+invoke 'base_sysstat'
 ## Time and location
 invoke 'base_locales'
 invoke 'base_timezone'
