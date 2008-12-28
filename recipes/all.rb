@@ -8,6 +8,7 @@ invoke 'base_apt'
 invoke 'base_ruby'
 invoke 'base_rubygems' # Relies on base_ruby
 invoke 'base_gems' # Relies on base_ruby and base_rubygems
+invoke 'base_ruby_github'
 invoke 'base_locales'
 
 # Base system
@@ -38,6 +39,7 @@ invoke 'base_apache'
 invoke 'base_php5'
 invoke 'base_ruby_enterprise'
 invoke 'base_passenger' # Relies on base_apache, base_ruby_enterprise
+invoke 'base_memcached'
 
 # Customizations
 invoke 'my_packages'
