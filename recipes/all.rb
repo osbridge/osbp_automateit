@@ -1,5 +1,8 @@
 # All recipes for this project
 
+# Platform check
+raise "Sorry, your platform is not supported" unless tagged?("ubuntu_8.04")
+
 # Bootstrap
 invoke 'base_apt'
 invoke 'base_ruby'
