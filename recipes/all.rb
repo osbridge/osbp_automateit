@@ -2,8 +2,8 @@
 
 # Bootstrap
 invoke 'base_ruby'
-invoke 'base_rubygems'
-invoke 'base_gems'
+invoke 'base_rubygems' # Relies on base_ruby
+invoke 'base_gems' # Relies on base_ruby and base_rubygems
 
 # Base system
 ## Security
@@ -23,14 +23,15 @@ invoke 'base_package_managers'
 invoke 'base_python_easy_install'
 
 # Base services
+invoke 'base_shmem'
 invoke 'base_exim'
 invoke 'base_fuse'
 invoke 'base_monit'
 invoke 'base_apache'
 invoke 'base_ruby_enterprise'
-invoke 'base_passenger'
+invoke 'base_passenger' # Relies on base_apache
+invoke 'base_postgresql' # Relies on base_shmem
 
 # Customizations
-invoke 'my_shmem'
 invoke 'my_packages'
 invoke 'my_ruby'

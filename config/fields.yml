@@ -1,5 +1,10 @@
 # Put your fields here
+## Used by "base_timezone.rb"
 timezone: "America/Los_Angeles"
+## Used by "base_shmem.rb"
+shmem:
+  shmall: 134217728
+  shmmax: 134217728
 
 # Secret fields here
 <%= File.read(File.join(File.dirname(__FILE__), "secrets.yml")) %>
