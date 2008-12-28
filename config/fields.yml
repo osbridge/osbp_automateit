@@ -5,6 +5,9 @@ timezone: "America/Los_Angeles"
 shmem:
   shmall: 134217728
   shmmax: 134217728
+## Used by "base_php5.rb"
+php5:
+  memory_limit: "64M"
 
 # Secret fields here
 <%= File.read(File.join(File.dirname(__FILE__), "secrets.yml")) %>
