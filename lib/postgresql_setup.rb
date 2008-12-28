@@ -2,7 +2,7 @@
 #
 # Setup PostgreSQL database.
 #
-# NOTE: Requires that the 'dbi' Ruby package be installed with PostgreSQL bindings.
+# NOTE: Requires Ruby 'dbi' package and bindings.
 class ::PostgreSQLSetup
   include AutomateIt::Constants
 
@@ -27,6 +27,19 @@ class ::PostgreSQLSetup
     self.interpreter.include_in(self, %w[writing? sh preview? log])
     self.default_db = opts[:default_db] || "template1"
     self.dba = opts[:dba] || "postgres"
+  end
+
+  # Run block with an instance as argument. Ensures that database connection
+  # is closed when block ends or an exception is raised. Accepts same
+  # arguments as #new.
+  def self.with(*args, &block)
+    instance = self.new(*args)
+    begin
+      instance.connect
+      block.call(instance)
+    ensure
+      instance.close rescue nil
+    end
   end
 
   # Connect to the database
@@ -173,12 +186,12 @@ end
 # Commands to exercise this class:
 
 load 'lib/postgresql_setup.rb'
-pg = PostgreSQLSetup.new(:interpreter => self)
-pg.connect_or_add_superuser
-pg.superuser?("root")
+db = PostgreSQLSetup.new(:interpreter => self)
+db.connect_or_add_superuser
+db.superuser?("root")
 
-pg.add_user("asdf")
-pg.grant_superuser("asdf")
-pg.revoke_superuser("asdf")
-pg.remove_user("asdf")
+db.add_user("asdf")
+db.grant_superuser("asdf")
+db.revoke_superuser("asdf")
+db.remove_user("asdf")
 =end

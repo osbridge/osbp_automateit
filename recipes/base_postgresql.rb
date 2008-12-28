@@ -67,11 +67,12 @@ service_manager.enable(service)
 
 # Manage accounts
 begin
-  pgsetup = PostgreSQLSetup.new(:interpreter => self)
-  pgsetup.connect_or_add_superuser
-  lookup("postgresql#accounts").each_pair do |username, opts|
-    pgsetup.add_user(username, :password => opts["password"])
-    pgsetup.grant_superuser(username) if opts["superuser"]
+  PostgreSQLSetup.new(:interpreter => self) do |db|
+    db.connect_or_add_superuser
+    lookup("postgresql#accounts").each_pair do |username, opts|
+      db.add_user(username, :password => opts["password"])
+      db.grant_superuser(username) if opts["superuser"]
+    end
   end
 rescue LoadError => e
   if preview? and e.message =~ /\bdbi\b/
@@ -79,6 +80,4 @@ rescue LoadError => e
   else
     raise e
   end
-ensure
-  pgsetup.close if pgsetup
 end

@@ -2,7 +2,7 @@
 #
 # Setup MySQL database.
 #
-# NOTE: Requires that the 'dbi' Ruby package be installed with MySQL bindings.
+# NOTE: Requires Ruby 'dbi' package and bindings.
 class ::MySQLSetup
   include AutomateIt::Constants
 
@@ -29,10 +29,11 @@ class ::MySQLSetup
     self.dba = opts[:dba] || "root"
   end
 
-  # Run block with an instance of MySQLSetup as argument. Ensures that database
-  # connection is closed when block ends or an exception is raised.
-  def self.with(opts={}, &block)
-    instance = self.new(opts)
+  # Run block with an instance as argument. Ensures that database connection
+  # is closed when block ends or an exception is raised. Accepts same
+  # arguments as #new.
+  def self.with(*args, &block)
+    instance = self.new(*args)
     begin
       instance.connect
       block.call(instance)
