@@ -1,9 +1,8 @@
 # Put your fields here
 timezone: "America/Los_Angeles"
-exim:
-  aliases:
-    root: "igal+root@pragmaticraft.com"
-    igal: "igal@pragmaticraft.com"
+
+# Secret fields here
+<%= File.read(File.join(File.dirname(__FILE__), "secrets.yml")) %>
 
 #-----------------------------------------------------------------------
 #
@@ -29,7 +28,7 @@ exim:
 # loaded after the tags, you can use ERB to dynamically set fields for
 # specific groups of hosts, e.g.:
 #
-#   magical: <%= tagged?("magical_hosts") ? true : false %>
+#   magical: <%#= tagged?("magical_hosts") ? true : false %>
 #
 # See AutomateIt::FieldManager for further details.
 #
