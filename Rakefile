@@ -22,3 +22,9 @@ desc "Preview action, e.g, 'rake preview hello'"
 task :preview do
   preview true
 end
+
+desc "Update server by pulling changes from git and applying them"
+task :update do
+  sh "git pull origin master"
+  sh "rake"
+end
