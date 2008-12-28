@@ -8,6 +8,7 @@ invoke 'base_apt'
 invoke 'base_ruby'
 invoke 'base_rubygems' # Relies on base_ruby
 invoke 'base_gems' # Relies on base_ruby and base_rubygems
+invoke 'base_locales'
 
 # Base system
 ## Security
@@ -19,7 +20,6 @@ invoke 'base_exim'
 invoke 'base_logwatch' # Relies on base_exim
 invoke 'base_sysstat'
 ## Time and location
-invoke 'base_locales'
 invoke 'base_timezone'
 invoke 'base_ntpd'
 ## Tools
