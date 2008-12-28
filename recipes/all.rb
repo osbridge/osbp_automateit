@@ -3,7 +3,7 @@
 # Platform check
 raise "Sorry, your platform is not supported" unless tagged?("ubuntu_8.04")
 
-# Bootstrap
+# Prepare
 invoke 'base_apt'
 invoke 'base_ruby'
 invoke 'base_rubygems' # Relies on base_ruby
