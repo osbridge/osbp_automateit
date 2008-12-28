@@ -16,15 +16,24 @@ pool_size = \
   else                6
   end
 
-# Retrieve version of installed package
-# TODO Gem API can't find package here, yet finds it from IRB. Why?
-#IK# version = Gem.source_index.search('passenger').map{|spec| spec.version}.sort.last.to_s
+# Retrieve information about installed package
 version = `gem list passenger --local`[/ \((.+?)\)/, 1].split(', ').sort.last
+passenger_path = File.dirname(`gem contents passenger --version #{version}`.split.first)
+ruby_path = nil
+ruby_paths = ["/opt/ruby-enterprise", "/usr/local", "/usr/bin"]
+ruby_paths.each do |prefix|
+  a_ruby_path = File.join(prefix, "bin", "ruby")
+  if File.exist?(a_ruby_path)
+    ruby_path = a_ruby_path
+    break
+  end
+end
+raise "Can't find Ruby's path" unless ruby_path
 
 modified |= render :text => <<-HERE, :to => "/etc/apache2/mods-available/passenger.load"
-LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-#{version}/ext/apache2/mod_passenger.so
-PassengerRoot               /usr/local/lib/ruby/gems/1.8/gems/passenger-#{version}
-PassengerRuby               /usr/local/bin/ruby
+LoadModule passenger_module #{passenger_path}/ext/apache2/mod_passenger.so
+PassengerRoot               #{passenger_path}
+PassengerRuby               #{ruby_path}
 PassengerMaxPoolSize        #{pool_size}
 PassengerMaxInstancesPerApp 2
 HERE
