@@ -10,7 +10,9 @@ invoke 'base_gems' # Relies on base_ruby and base_rubygems
 invoke 'base_firewall'
 invoke 'base_fail2ban'
 invoke 'base_ssh_gateway'
-invoke 'base_logwatch'
+invoke 'base_fuse'
+invoke 'base_exim'
+invoke 'base_logwatch' # Relies on base_exim
 invoke 'base_sysstat'
 ## Time and location
 invoke 'base_locales'
@@ -25,16 +27,14 @@ invoke 'base_java'
 
 # Base services
 invoke 'base_shmem'
-invoke 'base_exim'
-invoke 'base_fuse'
+invoke 'base_postgresql' # Relies on base_shmem
+invoke 'base_mysql'
 invoke 'base_monit'
 invoke 'base_apache'
 invoke 'base_php5'
 invoke 'base_ruby_enterprise'
-invoke 'base_passenger'
-invoke 'base_postgresql' # Relies on base_shmem
-invoke 'base_mysql'
+invoke 'base_passenger' # Relies on base_apache, base_ruby_enterprise
 
 # Customizations
 invoke 'my_packages'
-invoke 'my_ruby'
+invoke 'my_ruby' # Relies on base_compilers_and_interpreters
