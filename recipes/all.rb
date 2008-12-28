@@ -33,7 +33,7 @@ invoke 'base_php5'
 invoke 'base_ruby_enterprise'
 invoke 'base_passenger'
 invoke 'base_postgresql' # Relies on base_shmem
-# TODO invoke 'base_mysql'
+invoke 'base_mysql'
 
 # Customizations
 invoke 'my_packages'
