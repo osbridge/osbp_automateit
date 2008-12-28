@@ -31,5 +31,6 @@ invoke 'base_ruby_enterprise'
 invoke 'base_passenger'
 
 # Customizations
+invoke 'my_shmem'
 invoke 'my_packages'
 invoke 'my_ruby'
