@@ -4,7 +4,12 @@
 # - Relies on "lib/postgresql_setup.rb" for PostgreSQLSetup class
 # - Creates database accounts from fields at "postgresql#accounts". This leaf
 #   contains a hash of usernames to a hash of "password" strings and "superuser"
-#   booleans. E.g.,
+#   booleans. For example:
+#       postgresql:
+#         accounts:
+#           "myusername":
+#             password: "mypassword"
+#             superuser: true
 
 # Define version number to install
 postgres_package_version = \
