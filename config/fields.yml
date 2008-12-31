@@ -1,10 +1,13 @@
 # Put your fields here
+
 ## Used by "base_timezone.rb"
 timezone: "America/Los_Angeles"
+
 ## Used by "base_shmem.rb"
 shmem:
   shmall: 134217728
   shmmax: 134217728
+
 ## Used by "base_php5.rb"
 php5:
   memory_limit: "64M"
