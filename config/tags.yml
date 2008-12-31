@@ -1,5 +1,16 @@
 # Put your roles here
 
+<% if File.exist?('/proc/vz/veinfo') %>
+## OpenVZ host or container
+  <% if File.read('/proc/vz/veinfo').strip.empty? %>
+openvz_host:
+- localhost
+  <% else %>
+openvz_container:
+- localhost
+  <% end %>
+<% end %>
+
 #-----------------------------------------------------------------------
 #
 # == TAGS

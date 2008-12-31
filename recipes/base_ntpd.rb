@@ -1,7 +1,7 @@
 # Setup ntpd for keeping time in sync
 
-# Do not use NTP on OpenVZ VMs, it can't set the clock.
-if !File.exist?('/proc/vz/veinfo') || File.read('/proc/vz/veinfo').strip.empty?
+# Do not use NTP on an OpenVZ container, it can't set the clock.
+unless tagged?(:openvz_container)
   modified = package_manager.install %w[ntpdate ntp]
 
   # Sync the time
