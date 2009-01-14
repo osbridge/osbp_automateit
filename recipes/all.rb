@@ -43,4 +43,8 @@ invoke 'base_memcached'
 
 # Customizations
 invoke 'my_packages'
+invoke 'my_apache'
 invoke 'my_ruby' # Relies on base_compilers_and_interpreters
+invoke 'my_reown'
+invoke 'my_bridgepdx_user'
+invoke 'my_bridgepdx_wordpress' # Relies on base_apache, my_apache, base_php5, base_mysql
