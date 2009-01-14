@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# SUMMARY: Reown shared files and directories to correct group ownerships.
+# ARGUMENTS: Any arguments will cause this to run in quiet mode.
+
+if ! [[ 0 == $UID ]]; then
+    sudo $0 $1
+    exit $?
+fi
+
+if [[ $1 ]]; then
+    VERBOSE=n
+else
+    VERBOSE=y
+    echo "# reowning shared files and directories"
+fi
+
+chgrp -R `[[ y == $VERBOSE ]] && echo '-v'` bridgepdx "/var/www/bridgepdx.org"*
+find "/var/www/bridgepdx.org"* -type d -exec chmod g+s {} \; `[[ y == $VERBOSE ]] && echo '-print'`
