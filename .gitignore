@@ -1,5 +1,6 @@
 *.diff
 *.swp
 *.tmp
-config/secrets.yml
 *~
+README.html
+config/secrets.yml
