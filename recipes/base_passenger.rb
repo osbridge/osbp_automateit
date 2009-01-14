@@ -4,10 +4,6 @@ modified = false
 modified |= package_manager.install "apache2-prefork-dev"
 modified |= package_manager.install "passenger", :with => :gem, :docs => false
 
-if modified
-  sh "yes | passenger-install-apache2-module"
-end
-
 # Memory present, minus that needed for OS
 memory_availabe = `free -m`.match(/Mem:\s+(\d+)/)[1].to_i - 128
 pool_size = \
@@ -30,8 +26,13 @@ ruby_paths.each do |prefix|
 end
 raise "Can't find Ruby's path" unless ruby_path
 
+passenger_so = "#{passenger_path}/ext/apache2/mod_passenger.so"
+if modified || ! File.exist?(passenger_so)
+  sh "yes | passenger-install-apache2-module"
+end
+
 modified |= render :text => <<-HERE, :to => "/etc/apache2/mods-available/passenger.load"
-LoadModule passenger_module #{passenger_path}/ext/apache2/mod_passenger.so
+LoadModule passenger_module #{passenger_so}
 PassengerRoot               #{passenger_path}
 PassengerRuby               #{ruby_path}
 PassengerMaxPoolSize        #{pool_size}
