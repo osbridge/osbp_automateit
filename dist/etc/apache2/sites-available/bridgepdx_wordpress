@@ -3,7 +3,7 @@ NameVirtualHost *
 <VirtualHost *>
     VirtualDocumentRoot /var/www/bridgepdx_wordpress
     ServerName bridgepdx.org
-    ServerAlias www.bridgepdx.org bridgepdx
+    ServerAlias www.bridgepdx.org bridgepdx bridgepdx.pragmaticraft.com
     ErrorLog /var/log/apache2/bridgepdx_wordpress.error.log
     TransferLog /var/log/apache2/bridgepdx_wordpress.access.log
 </VirtualHost>
