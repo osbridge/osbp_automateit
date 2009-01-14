@@ -15,5 +15,5 @@ else
     echo "# reowning shared files and directories"
 fi
 
-chgrp -R `[[ y == $VERBOSE ]] && echo '-v'` bridgepdx "/var/www/bridgepdx.org"*
-find "/var/www/bridgepdx.org"* -type d -exec chmod g+s {} \; `[[ y == $VERBOSE ]] && echo '-print'`
+chgrp -R `[[ y == $VERBOSE ]] && echo '-v'` bridgepdx "/var/www/bridgepdx"*
+find "/var/www/bridgepdx"* -type d -exec chmod g+s {} \; `[[ y == $VERBOSE ]] && echo '-print'`
