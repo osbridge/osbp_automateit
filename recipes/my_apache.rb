@@ -2,6 +2,7 @@
 
 mods = %w[
   vhost_alias
+  rewrite
 ]
 
 mods.each do |mod|
