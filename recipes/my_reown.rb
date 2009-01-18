@@ -7,3 +7,8 @@ cp dist+path, path, :user => "root", :group => "root", :mode => 0755
 edit '/etc/sudoers' do
   append '%bridgepdx ALL = NOPASSWD: /usr/local/bin/reown'
 end
+
+edit('/var/spool/cron/crontabs/root', :create => true, :user => 'root', :group => 'crontab', :mode => 0600) do
+  append '# m h  dom mon dow   command'
+  append '* * * * * /usr/local/bin/reown --quiet'
+end
