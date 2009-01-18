@@ -17,3 +17,4 @@ fi
 
 chgrp -R `[[ y == $VERBOSE ]] && echo '-v'` bridgepdx "/var/www/bridgepdx"*
 find "/var/www/bridgepdx"* -type d -exec chmod g+s {} \; `[[ y == $VERBOSE ]] && echo '-print'`
+chmod -R `[[ y == $VERBOSE ]] && echo '-v'` g+rwX "/var/www/bridgepdx"*
