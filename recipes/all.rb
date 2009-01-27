@@ -10,19 +10,23 @@ invoke 'base_rubygems' # Relies on base_ruby
 invoke 'base_gems' # Relies on base_ruby and base_rubygems
 invoke 'base_ruby_github'
 invoke 'base_locales'
+invoke 'base_shmem'
 
 # Base system
-## Security
+## Security and networking
 invoke 'base_firewall'
 invoke 'base_fail2ban'
 invoke 'base_ssh_gateway'
 invoke 'base_fuse'
 invoke 'base_exim'
-invoke 'base_logwatch' # Relies on base_exim
-invoke 'base_sysstat'
+invoke 'base_cron_apt'
 ## Time and location
 invoke 'base_timezone'
 invoke 'base_ntpd'
+## Monitoring
+invoke 'base_logwatch' # Relies on base_exim
+invoke 'base_sysstat'
+invoke 'base_monit'
 ## Tools
 invoke 'base_revision_control'
 invoke 'base_compilers_and_interpreters'
@@ -31,10 +35,8 @@ invoke 'base_python_easy_install'
 invoke 'base_java'
 
 # Base services
-invoke 'base_shmem'
 invoke 'base_postgresql' # Relies on base_shmem
 invoke 'base_mysql'
-invoke 'base_monit'
 invoke 'base_apache'
 invoke 'base_php5'
 invoke 'base_ruby_enterprise'
