@@ -8,7 +8,7 @@ package_manager.install <<-HERE
   mutt mailx
 
   # Server programs
-  exim4 exim4-base eximon4 exim4-doc-html exim4-doc-info libwww-perl
+  exim4 exim4-base exim4-doc-html libwww-perl
 HERE
 
 # Setup aliases
