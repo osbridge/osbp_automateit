@@ -40,8 +40,10 @@ system("/usr/local/bin/reown -q") unless preview?
 
 # Setup apache
 modified = false
-modified |=  cp dist+site_available, site_available, :user => 'root', :group => 'root', :mode => 0444
+modified |=  render(dist+site_available+'.erb', site_available, :user => 'root', :group => 'root', :mode => 0444)
 modified |= ln_sf site_available, site_enabled
 
 # Reload apache if needed
 service_manager.tell("apache", "force-reload") if modified
+
+# FIXME Enable modules: proxy proxy_http
