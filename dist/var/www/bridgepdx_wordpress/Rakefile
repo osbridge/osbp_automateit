@@ -1,0 +1,64 @@
+# Tasks for manipulating the OpenSourceBridge WordPress instance
+
+verbose(true)
+
+task :default => :help
+
+task :help do
+  puts <<-HERE
+OpenSourceBridge WordPress rake tasks:
+- dump : Dump database to a FILE
+- restore : Restore database from a FILE
+- rehome : Alter database's home paths
+  HERE
+end
+
+desc "Rehome database to URL"
+task :rehome do
+  url = ENV['URL'] or raise ArgumentError, 'URL environmental variable not specified'
+  #sh %{mysql #{credentials_for_cli} < "update wp_options set option_value='#{url}' where option_name='siteurl' or option_name='home'"}, :verbose => true
+  sh %{echo "update wp_options set option_value='#{url}' where option_name='siteurl' or option_name='home'" | mysql #{credentials_for_cli}}, :verbose => true
+end
+
+desc "Dump database to a FILE"
+task :dump do
+  sh "mysqldump --add-locks --create-options --disable-keys --extended-insert --quick --set-charset #{credentials_for_cli} > #{sql_filename}"
+end
+
+desc "Restore database from a FILE"
+task :restore do
+  sh "mysql #{credentials_for_cli} < #{sql_filename}", :verbose => true
+end
+
+def credentials_for_cli
+   return "--user=#{credentials.user} --password=#{credentials.password} --host=#{credentials.host} #{credentials.database}"
+end
+
+def credentials
+  return @@credentials ||= Credentials.import
+end
+
+def sql_filename
+  return ENV['FILE'] || 'bridgepdx_wordpress.sql'
+end
+
+# = Credentials
+#
+# Import the WordPress database configuration
+class Credentials < Struct.new(:user, :password, :database, :host)
+  def self.import(file='wp-config.php')
+    r = self.new
+    open('wp-config.php') do |h|
+      data = h.read
+      r.user     = self.extract(data, 'DB_USER')
+      r.password = self.extract(data, 'DB_PASSWORD')
+      r.database = self.extract(data, 'DB_NAME')
+      r.host     = self.extract(data, 'DB_HOST')
+    end
+    return r
+  end
+
+  def self.extract(data, key)
+    return data[%r{^define\('#{key}', '([^']+)'\)}, 1]
+  end
+end
