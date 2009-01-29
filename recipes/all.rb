@@ -50,3 +50,4 @@ invoke 'my_ruby' # Relies on base_compilers_and_interpreters
 invoke 'my_reown'
 invoke 'my_bridgepdx_user'
 invoke 'my_bridgepdx_wordpress' # Relies on base_apache, my_apache, base_php5, base_mysql
+invoke 'my_bridgepdx_ocw' # Relies on base_apache, my_apache, base_ruby, my_ruby
