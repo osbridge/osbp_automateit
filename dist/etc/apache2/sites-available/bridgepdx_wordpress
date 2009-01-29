@@ -20,4 +20,54 @@
     RewriteCond %{HTTP_HOST} !^opensourcebridge.org [NC]
     RewriteCond %{HTTP_HOST} !^$
     RewriteRule ^/(.*) http://opensourcebridge.org/$1 [L,R]
+
+    # Proxy
+    ProxyRequests off
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+
+    # OCW
+    ProxyPass        /events  http://ocw.opensourcebridge.org/events
+    ProxyPassReverse /events  http://ocw.opensourcebridge.org/events
+
+    ProxyPass        /proposals  http://ocw.opensourcebridge.org/proposals
+    ProxyPassReverse /proposals  http://ocw.opensourcebridge.org/proposals
+
+    ProxyPass        /login  http://ocw.opensourcebridge.org/login
+    ProxyPassReverse /login  http://ocw.opensourcebridge.org/login
+
+    ProxyPass        /logout  http://ocw.opensourcebridge.org/logout
+    ProxyPassReverse /logout  http://ocw.opensourcebridge.org/logout
+
+    ProxyPass        /sessions  http://ocw.opensourcebridge.org/sessions
+    ProxyPassReverse /sessions  http://ocw.opensourcebridge.org/sessions
+
+    ProxyPass        /session  http://ocw.opensourcebridge.org/session
+    ProxyPassReverse /session  http://ocw.opensourcebridge.org/session
+
+    ProxyPass        /users  http://ocw.opensourcebridge.org/users
+    ProxyPassReverse /users  http://ocw.opensourcebridge.org/users
+
+    ProxyPass        /admin  http://ocw.opensourcebridge.org/admin
+    ProxyPassReverse /admin  http://ocw.opensourcebridge.org/admin
+
+    ProxyPass        /images  http://ocw.opensourcebridge.org/images
+    ProxyPassReverse /images  http://ocw.opensourcebridge.org/images
+
+    ProxyPass        /stylesheets  http://ocw.opensourcebridge.org/stylesheets
+    ProxyPassReverse /stylesheets  http://ocw.opensourcebridge.org/stylesheets
+
+    ProxyPass        /javascripts  http://ocw.opensourcebridge.org/javascripts
+    ProxyPassReverse /javascripts  http://ocw.opensourcebridge.org/javascripts
+
+    ProxyPass        /themes  http://ocw.opensourcebridge.org/themes
+    ProxyPassReverse /themes  http://ocw.opensourcebridge.org/themes
+
+    ProxyPass        /comments  http://ocw.opensourcebridge.org/comments
+    ProxyPassReverse /comments  http://ocw.opensourcebridge.org/comments
+
+    ProxyPass        /manage  http://ocw.opensourcebridge.org/manage
+    ProxyPassReverse /manage  http://ocw.opensourcebridge.org/manage
 </VirtualHost>
