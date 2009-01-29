@@ -1,9 +1,18 @@
 NameVirtualHost *
 
 <VirtualHost *>
+    # Site
     VirtualDocumentRoot /var/www/bridgepdx_wordpress
     ServerName bridgepdx.org
-    ServerAlias www.bridgepdx.org bridgepdx bridgepdx.pragmaticraft.com
+    ServerAlias www.bridgepdx.org bridgepdx bridgepdx.pragmaticraft.com opensourcebridge.org www.opensourcebridge.org
+
+    # Logs
     ErrorLog /var/log/apache2/bridgepdx_wordpress.error.log
     TransferLog /var/log/apache2/bridgepdx_wordpress.access.log
+
+    # Canonical hostname
+    RewriteEngine on
+    RewriteCond %{HTTP_HOST} !^opensourcebridge.org [NC]
+    RewriteCond %{HTTP_HOST} !^$
+    RewriteRule ^/(.*) http://opensourcebridge.org/$1 [L,R]
 </VirtualHost>
