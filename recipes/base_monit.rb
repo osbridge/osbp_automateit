@@ -11,7 +11,7 @@ raise "Couldn't find #{source_monitrc}, for sample see #{source_monitrc}.sample"
 modified = package_manager.install 'monit'
 
 # Install configuration file
-modified |= cp source_monitrc, target_monitrc
+modified |= cp source_monitrc, target_monitrc, :mode => 0444
 
 # Enable startup
 modified |= \
