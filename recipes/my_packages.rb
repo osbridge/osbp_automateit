@@ -7,6 +7,7 @@ package_manager.install <<-HERE
   aspell ispell aspell-en
   time pcregrep
   man-db
+  sysutils
 
   # Network tools
   rsync curl apache2-utils httperf host dnsutils
