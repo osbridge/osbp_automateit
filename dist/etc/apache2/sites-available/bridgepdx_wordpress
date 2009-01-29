@@ -5,8 +5,6 @@
 # | know what this means, please talk to your system administrator.     |
 # +---------------------------------------------------------------------+
 
-NameVirtualHost *
-
 <VirtualHost *>
     # Site
     VirtualDocumentRoot /var/www/bridgepdx_wordpress
