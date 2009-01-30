@@ -31,10 +31,26 @@
     # OCW
     # FIXME session?
     # FIXME json/xml/csv?
-<% for frag in %w[events proposals proposals.atom proposals.csv comments comments.atom session sessions login logout admin manage images stylesheets javascripts themes] %>
-    ProxyPass        /<%= frag %>  http://ocw.opensourcebridge.org/<%= frag %>
+<% for frag in %w[
+admin
+comments
+events
+images
+javascripts
+login
+logout
+manage
+proposals
+session
+sessions
+stylesheets
+themes
+users
+] %>
+    ProxyPassMatch ^(/<%= frag %>\..*)$  http://ocw.opensourcebridge.org$1
+    ProxyPass /<%= frag %>  http://ocw.opensourcebridge.org/<%= frag %>
     <Location /<%= frag %>>
-      ProxyPassReverse /<%= frag %>  http://ocw.opensourcebridge.org/<%= frag %>
+      ProxyPassReverse http://ocw.opensourcebridge.org/<%= frag %>
     </Location>
 <% end %>
 </VirtualHost>
