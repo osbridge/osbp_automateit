@@ -22,6 +22,11 @@ else
     echo "# reowning shared files and directories"
 fi
 
-chgrp -R `[[ y == $VERBOSE ]] && echo '-v'` bridgepdx "/var/www/bridgepdx"*
-find "/var/www/bridgepdx"* -type d -exec chmod g+s {} \; `[[ y == $VERBOSE ]] && echo '-print'`
-chmod -R `[[ y == $VERBOSE ]] && echo '-v'` g+rwX "/var/www/bridgepdx"*
+wrapper () {
+    #ionice -c 2 -n 7 -- nice -n 19 -- "$@"
+    nice -n 19 -- "$@"
+}
+
+wrapper chgrp -R bridgepdx "/var/www/bridgepdx"*
+wrapper find "/var/www/bridgepdx"* -type d -exec chmod g+s {} \;
+wrapper chmod -R g+rwX "/var/www/bridgepdx"*
