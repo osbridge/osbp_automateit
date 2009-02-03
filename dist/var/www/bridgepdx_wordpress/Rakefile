@@ -7,7 +7,7 @@
 # | know what this means, please talk to your system administrator.     |
 # +---------------------------------------------------------------------+
 
-verbose(true)
+verbose(true) unless ENV['VERBOSE'] == 'false'
 
 task :default => :help
 
