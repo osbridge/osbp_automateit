@@ -4,6 +4,9 @@
 mods = %w[
   vhost_alias
   rewrite
+  deflate
+  headers
+  expires
 ]
 
 #-----------------------------------------------------------------------
