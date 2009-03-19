@@ -10,11 +10,19 @@
 # SUMMARY: Reown shared files and directories to correct group ownerships.
 # ARGUMENTS: Any arguments will cause this to run in quiet mode.
 
-if ! [[ 0 == $UID ]]; then
-    sudo $0 $1
-    exit $?
+# There can be only one
+# FIXME why does "1" below cause this to always fail?!
+if [ `pgrep reown | wc -l` -gt 2 ]; then
+   echo "Already running"
+   exit 2
 fi
 
+# Rerun command as root or through sudo
+if ! [[ 0 == $UID ]]; then
+    exec sudo $0 $1
+fi
+
+# Parse arguments
 if [[ $1 ]]; then
     VERBOSE=n
 else
@@ -22,11 +30,13 @@ else
     echo "# reowning shared files and directories"
 fi
 
+# Execute commands at low priority
 wrapper () {
     #ionice -c 2 -n 7 -- nice -n 19 -- "$@"
     nice -n 19 -- "$@"
 }
 
+# Commands to execute
 wrapper chgrp -R bridgepdx "/var/www/bridgepdx"*
 wrapper find "/var/www/bridgepdx"* -type d -exec chmod g+s {} \;
 wrapper chmod -R g+rwX "/var/www/bridgepdx"*
