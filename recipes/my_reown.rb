@@ -10,5 +10,6 @@ end
 
 edit('/var/spool/cron/crontabs/root', :create => true, :user => 'root', :group => 'crontab', :mode => 0600) do
   append '# m h  dom mon dow   command'
-  append '* * * * * /usr/local/bin/reown --quiet'
+  delete '* * * * * /usr/local/bin/reown --quiet'
+  append '*/5 * * * * /usr/local/bin/reown --quiet'
 end
