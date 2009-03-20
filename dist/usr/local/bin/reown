@@ -10,24 +10,26 @@
 # SUMMARY: Reown shared files and directories to correct group ownerships.
 # ARGUMENTS: Any arguments will cause this to run in quiet mode.
 
-# There can be only one
-# FIXME why does "1" below cause this to always fail?!
-if [ `pgrep reown | wc -l` -gt 2 ]; then
-   echo "Already running"
-   exit 2
-fi
-
-# Rerun command as root or through sudo
-if ! [[ 0 == $UID ]]; then
-    exec sudo $0 $1
-fi
-
 # Parse arguments
 if [[ $1 ]]; then
     VERBOSE=n
 else
     VERBOSE=y
     echo "# reowning shared files and directories"
+fi
+
+# There can be only one
+# FIXME why does "1" below cause this to always think there's something running?!
+if [ `pgrep reown | wc -l` -gt 2 ]; then
+   if [[ $VERBOSE = y ]]; then
+       echo "Already running"
+   fi
+   exit 2
+fi
+
+# Rerun command as root or through sudo
+if ! [[ 0 == $UID ]]; then
+    exec sudo $0 $1
 fi
 
 # Execute commands at low priority
