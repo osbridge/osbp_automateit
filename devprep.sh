@@ -28,4 +28,4 @@ sshfs $PROJECT_CHECKOUT_DIR /var/local/automateit
 sshfs $AUTOMATEIT_CHECKOUT_DIR /mnt/aisrc
 export PATH=/mnt/aisrc/bin:$PATH
 export RUBYLIB=/mnt/aisrc/lib:$RUBYLIB
-cp -v /var/cache/apt/archives/ruby-enterprise* /tmp
+cp -u -v /var/cache/apt/archives/ruby-enterprise* /tmp
