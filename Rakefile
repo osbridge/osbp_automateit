@@ -23,10 +23,15 @@ task :preview do
   preview true
 end
 
-desc "Update server by pulling changes from git and applying them"
+desc "Update recipes from git"
 task :update do
   sh "git pull origin master"
-  sh "rake"
+end
+
+desc "Upgrade server by pulling changes from git and applying them"
+task :upgrade do
+  Rake::Task[:update].invoke
+  Rake::Task[:all].invoke
 end
 
 desc "Generate README as HTML"
