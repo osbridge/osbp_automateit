@@ -39,6 +39,10 @@ wrapper () {
 }
 
 # Commands to execute
-wrapper chgrp -R bridgepdx "/var/www/bridgepdx"*
-wrapper find "/var/www/bridgepdx"* -type d -exec chmod g+s {} \;
-wrapper chmod -R g+rwX "/var/www/bridgepdx"*
+## Traditional UNIX-based permissions
+### wrapper chgrp -R bridgepdx "/var/www/bridgepdx"*
+### wrapper find "/var/www/bridgepdx"* -type d -exec chmod g+s {} \;
+### wrapper chmod -R g+rwX "/var/www/bridgepdx"*
+## Contemporary ACL-based permissions
+wrapper setfacl -R -d -m g:bridgepdx:rwX "/var/www/bridgepdx"*
+wrapper setfacl -R    -m g:bridgepdx:rwX "/var/www/bridgepdx"*
