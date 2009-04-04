@@ -1,6 +1,7 @@
 # Put your environment commands here
 
 set :stow_dir, "/usr/local/stow"
+set :apache_manager, ApacheManager.new(self)
 
 #-----------------------------------------------------------------------
 #
