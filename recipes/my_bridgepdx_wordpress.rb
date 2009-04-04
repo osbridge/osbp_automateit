@@ -30,18 +30,12 @@ wp-config.php
 user = "bridgepdx"
 sitename = "bridgepdx_wordpress"
 docroot = "/var/www/#{sitename}"
-site_available = "/etc/apache2/sites-available/#{sitename}"
-site_enabled = "/etc/apache2/sites-enabled/#{sitename}"
 
 # Setup directory
 mkdir_p(docroot) && chown(user, user, docroot, :recursive => true)
 
 # Setup apache
-modified = false
-modified |=  render(dist+site_available+'.erb', site_available, :user => 'root', :group => 'root', :mode => 0444)
-modified |= ln_sf site_available, site_enabled
+modified = apache_manager.install_site(sitename, :template => true)
 
 # Reload apache if needed
-service_manager.tell("apache", "force-reload") if modified
-
-# FIXME Enable modules: proxy proxy_http
+apache_manager.reload if modified
