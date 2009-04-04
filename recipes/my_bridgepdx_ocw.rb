@@ -12,7 +12,6 @@ site_enabled = "/etc/apache2/sites-enabled/#{sitename}"
 
 # Setup directory
 mkdir_p(docroot) && chown(user, user, docroot, :recursive => true)
-#IK# system("/usr/local/bin/reown -q &") unless preview?
 
 # Setup apache
 modified = false
