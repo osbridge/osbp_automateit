@@ -39,7 +39,5 @@ PassengerMaxPoolSize        #{pool_size}
 PassengerMaxInstancesPerApp 2
 HERE
 
-if modified
-  sh "a2enmod passenger"
-  service_manager.tell :apache2, "force-reload"
-end
+modified |= apache_manager.enable_module "passenger"
+apache_manager.reload if modified
