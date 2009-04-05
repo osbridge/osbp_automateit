@@ -5,6 +5,8 @@
 initializer = "/etc/init.d/firewall"
 rules       = "/etc/firewall_rules.sh"
 
+package_manager.install "iptables"
+
 modified = false
 modified |= cp(dist+initializer, initializer, :mode => 0555, :user => "root", :group => "root")
 modified |= cp(dist+rules,       rules,       :mode => 0555, :user => "root", :group => "root")
