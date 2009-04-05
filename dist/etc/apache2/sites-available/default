@@ -5,8 +5,12 @@
 # | know what this means, please talk to your system administrator.     |
 # +---------------------------------------------------------------------+
 
-NameVirtualHost *
-<VirtualHost *>
+NameVirtualHost *:80
+<IfModule mod_ssl.c>
+    NameVirtualHost *:443
+</IfModule>
+
+<VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 
 	DocumentRoot /var/www/

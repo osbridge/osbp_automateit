@@ -5,7 +5,7 @@
 # | know what this means, please talk to your system administrator.     |
 # +---------------------------------------------------------------------+
 
-<VirtualHost *>
+<VirtualHost *:80>
     DocumentRoot /var/www/bridgepdx_ocw/current/public
     ServerName ocw.bridgepdx.org
     ServerAlias ocw ocw.opensourcebridge.org
