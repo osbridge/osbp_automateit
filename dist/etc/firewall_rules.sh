@@ -14,6 +14,8 @@ iptables -P FORWARD DROP
 # to allow incoming traffic
 iptables -A INPUT -p tcp -s 0/0 --dport 22 -j ACCEPT # ssh
 iptables -A INPUT -p tcp -s 0/0 --dport 80 -j ACCEPT # http
+iptables -A INPUT -p tcp -s 0/0 --dport 443 -j ACCEPT # https
+# to allow responses on specific ports
 iptables -A INPUT -p tcp -s 0/0 --sport 53 -d 0/0 -j ACCEPT # dns replies
 iptables -A INPUT -p udp -s 0/0 --sport 53 -d 0/0 -j ACCEPT # dns replies
 # drop everything else
