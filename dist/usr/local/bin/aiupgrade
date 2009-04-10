@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd /var/local/automateit && git pull --quiet origin master && aiapply "$@"

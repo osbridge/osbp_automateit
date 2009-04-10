@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd /var/local/automateit && automateit recipes/all.rb "$@"
