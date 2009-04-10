@@ -13,20 +13,18 @@ HERE
 
 # Setup aliases
 aliases = lookup('exim#aliases') rescue nil
-if aliases
-  raise "exim#aliases field's value must be a Hash" unless aliases.is_a?(Hash)
-  modified = \
-    edit :file => "/etc/aliases" do
-      aliases.each_pair do |key, value|
-        line = "#{key}: #{value}"
-        prefix = /^#{key}:/
-        unless contains?(line)
-          if contains?(prefix)
-            comment prefix
-          end
-          append line
+raise "exim#aliases field's value must be a Hash" unless aliases.is_a?(Hash)
+modified = \
+  edit :file => "/etc/aliases" do
+    aliases.each_pair do |key, value|
+      line = "#{key}: #{value}"
+      prefix = /^#{key}:/
+      unless contains?(line)
+        if contains?(prefix)
+          comment prefix
         end
+        append line
       end
     end
-  sh 'newaliases' if modified
-end
+  end
+sh 'newaliases' if modified
