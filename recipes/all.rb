@@ -4,6 +4,7 @@
 raise "Sorry, your platform is not supported" unless tagged?("ubuntu_8.04")
 
 # Prepare
+invoke 'base_airunners'
 invoke 'base_apt'
 invoke 'base_ruby'
 invoke 'base_rubygems' # Relies on base_ruby
@@ -52,5 +53,4 @@ invoke 'my_bridgepdx_common' # Relies on my_apache, my_bridgepdx_user
 invoke 'my_bridgepdx_wordpress' # Relies on my_bridgepdx_common, my_apache, base_php5, base_mysql, my_bridgepdx_user
 invoke 'my_bridgepdx_ocw' # Relies on my_apache, my_ruby, my_bridgepdx_user
 invoke 'my_bridgepdx_secrets' # Relies on my_apache, base_php5, my_bridgepdx_user
-invoke 'my_airunners'
 invoke 'my_reown'
