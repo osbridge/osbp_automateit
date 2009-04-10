@@ -1,3 +1,5 @@
 #!/bin/sh
 
+# SUMMARY: Apply AutomateIt recipes
+
 cd /var/local/automateit && automateit recipes/all.rb "$@"
