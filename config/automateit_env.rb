@@ -2,6 +2,7 @@
 
 set :stow_dir, "/usr/local/stow"
 set :apache_manager, ApacheManager.new(self)
+set :mysql_manager, MysqlManager.new(self)
 
 #-----------------------------------------------------------------------
 #
