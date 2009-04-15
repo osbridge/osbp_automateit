@@ -17,7 +17,12 @@ PATH=/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 . /lib/lsb/init-functions
 
 pidpath=/var/run
-host=burnside.pragmaticraft.com
+
+# Forward request to:
+#IK# host=burnside.pragmaticraft.com
+#IK# host=morrison.pragmaticraft.com
+#IK# host=74.63.10.184 # burnside
+host=74.63.9.155 # morrison
 
 do_start() {
     for port in 80 443; do
