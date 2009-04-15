@@ -1,7 +1,7 @@
 # Setup OpenConferenceWare
 
 # Gems
-package_manager.install <<-HERE, , :with => :gem, :docs => false
+package_manager.install <<-HERE, :with => :gem, :docs => false
   mbleigh-acts-as-taggable-on
   right_aws
   thoughtbot-paperclip
