@@ -34,6 +34,7 @@ invoke 'base_compilers_and_interpreters'
 invoke 'base_package_managers'
 invoke 'base_python_easy_install'
 invoke 'base_java'
+invoke 'base_sqlite'
 
 # Enable/disable penwrap proxy
 invoke 'my_penwrap'
