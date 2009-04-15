@@ -1,7 +1,18 @@
 # Setup OpenConferenceWare
 
 # Gems
-package_manager.install %w[mbleigh-acts-as-taggable-on right_aws thoughtbot-paperclip ruby-openid RedCloth], :with => :gem, :docs => false
+package_manager.install <<-HERE, , :with => :gem, :docs => false
+  mbleigh-acts-as-taggable-on
+  right_aws
+  thoughtbot-paperclip
+  ruby-openid
+  RedCloth
+HERE
+
+# Libraries
+package_manager.install <<-HERE
+  imagemagick
+HERE
 
 # Variables
 user = "bridgepdx"
