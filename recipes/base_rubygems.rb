@@ -21,3 +21,6 @@ if needs_installing
 end
 
 ln_sf("/usr/bin/gem1.8", "/usr/bin/gem")
+
+gemrc = "/root/.gemrc"
+cp dist+gemrc, gemrc
