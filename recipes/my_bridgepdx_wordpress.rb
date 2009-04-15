@@ -39,3 +39,9 @@ modified = apache_manager.install_site(sitename, :template => true)
 
 # Reload apache if needed
 apache_manager.reload if modified
+
+# Add task to dump database to file
+edit("/var/spool/cron/crontabs/#{user}", :create => true, :user => user, :group => "crontab", :mode => 0600) do
+  append "# m h  dom mon dow   command"
+  append "17 * * * * if test -f /var/www/bridgepdx_wordpress/Rakefile; then (cd /var/www/bridgepdx_wordpress && rake --silent dump); fi"
+end
