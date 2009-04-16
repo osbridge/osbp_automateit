@@ -22,7 +22,6 @@
 
     # Attendee wiki
     RewriteEngine On
-    RewriteCond %{REQUEST_URI} ^.*[sS]kins.*$
     RewriteRule ^/wiki/[sS]kins/(.*)$ /var/www/bridgepdx_wiki/skins/$1 [L,QSA]
     RewriteRule ^/wiki(/?.*)$ /var/www/bridgepdx_wiki/index.php?title=$1 [L,QSA]
 
