@@ -20,6 +20,12 @@
     # Planning wiki
     Alias /planning /var/www/bridgepdx_planning
 
+    # Attendee wiki
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} ^.*[sS]kins.*$
+    RewriteRule ^/wiki/[sS]kins/(.*)$ /var/www/bridgepdx_wiki/skins/$1 [L,QSA]
+    RewriteRule ^/wiki(/?.*)$ /var/www/bridgepdx_wiki/index.php?title=$1 [L,QSA]
+
     # Logs
     ErrorLog /var/log/apache2/bridgepdx_wordpress.error.log
     TransferLog /var/log/apache2/bridgepdx_wordpress.access.log
