@@ -22,7 +22,8 @@ pidpath=/var/run
 #IK# host=burnside.pragmaticraft.com
 #IK# host=morrison.pragmaticraft.com
 #IK# host=74.63.10.184 # burnside
-host=74.63.9.155 # morrison
+#IK# host=74.63.9.155 # morrison
+host=74.63.15.132 # hawthorne
 
 do_start() {
     for port in 80 443; do
