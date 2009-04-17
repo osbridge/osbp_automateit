@@ -40,6 +40,9 @@ modified = apache_manager.install_site(sitename, :template => true)
 # Reload apache if needed
 apache_manager.reload if modified
 
+# Add program that can dump database to file
+cpdist("/var/www/bridgepdx_wordpress/Rakefile")
+
 # Add task to dump database to file
 edit("/var/spool/cron/crontabs/#{user}", :create => true, :user => user, :group => "crontab", :mode => 0600) do
   append "# m h  dom mon dow   command"
