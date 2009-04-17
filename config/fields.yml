@@ -13,7 +13,9 @@ php5:
   memory_limit: "64M"
 
 # Secret fields here
-<%= File.read(File.join(File.dirname(__FILE__), "secrets.yml")) %>
+<% secrets_yml = File.join(File.dirname(__FILE__), "secrets.yml"); if File.exist?(secrets_yml) %>
+<%= File.read(secrets_yml) %>
+<% else; puts "WARNING: Couldn't find secrets, please add them to: #{secrets_yml}"; end %>
 
 #-----------------------------------------------------------------------
 #
