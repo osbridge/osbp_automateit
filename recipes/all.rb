@@ -45,7 +45,11 @@ unless tagged?(:standby)
   invoke 'base_mysql'
   invoke 'base_apache'
   invoke 'base_php5'
-  invoke 'base_ruby_enterprise'
+  begin
+    invoke 'base_ruby_enterprise'
+  rescue
+    invoke 'base_ruby_enterprise_from_source'
+  end
   invoke 'base_passenger' # Relies on base_apache, base_ruby_enterprise
   invoke 'base_memcached'
 
