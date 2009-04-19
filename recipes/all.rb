@@ -17,7 +17,7 @@ invoke 'base_shmem'
 ## Security and networking
 invoke 'base_firewall'
 invoke 'base_fail2ban'
-invoke 'base_ssh_gateway'
+invoke 'base_ssh'
 invoke 'base_fuse'
 invoke 'base_exim'
 invoke 'base_cron_apt'
