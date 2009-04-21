@@ -21,6 +21,7 @@ invoke 'base_ssh_gateway'
 invoke 'base_fuse'
 invoke 'base_exim'
 invoke 'base_cron_apt'
+invoke 'base_ssl'
 ## Time and location
 invoke 'base_timezone'
 invoke 'base_ntpd'
