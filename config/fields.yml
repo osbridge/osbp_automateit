@@ -12,6 +12,11 @@ shmem:
 php5:
   memory_limit: "64M"
 
+## Used by "base_passenger.rb"
+### passenger:
+###   pool_size: 8
+###   max_instances: 6
+
 # Secret fields here
 <% secrets_yml = File.join(File.dirname(__FILE__), "secrets.yml"); if File.exist?(secrets_yml) %>
 <%= File.read(secrets_yml) %>

@@ -1,16 +1,26 @@
 # Setup Phusion Passenger
+#
+# NOTE: The Passenger pool_size and max_instances are automatically set.
+# However, you can set specific values in the fields.yml, e.g.:
+#   passenger:
+#     pool_size: 8
+#     max_instances: 6
 
 modified = false
 modified |= package_manager.install "apache2-prefork-dev"
 modified |= package_manager.install "passenger", :with => :gem, :docs => false
 
 # Memory present, minus that needed for OS
-memory_availabe = `free -m`.match(/Mem:\s+(\d+)/)[1].to_i - 128
-pool_size = \
-  case memory_availabe
-  when 0 .. 128  then 4
-  else                6
-  end
+pool_size = lookup('passenger#pool_size') rescue nil
+max_instances = lookup('passenger#max_instances') rescue nil
+unless pool_size
+  memory_capacity = `free -m`.match(/Mem:\s+(\d+)/)[1].to_i
+  pool_size = \
+    case memory_capacity
+    when 0 .. 256 then 2
+    else ((memory_capacity-128)/100.0).ceil
+    end
+end
 
 # Retrieve information about installed package
 version = `gem list passenger --local`[/ \((.+?)\)/, 1].split(', ').sort.last
@@ -36,7 +46,7 @@ LoadModule passenger_module #{passenger_so}
 PassengerRoot               #{passenger_path}
 PassengerRuby               #{ruby_path}
 PassengerMaxPoolSize        #{pool_size}
-PassengerMaxInstancesPerApp 2
+#{max_instances ? 'PassengerMaxInstancesPerApp %i' % max_instances : ''}
 HERE
 
 modified |= apache_manager.enable_module "passenger"
