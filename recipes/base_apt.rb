@@ -1,5 +1,7 @@
 # Setup apt
 
-filename = "/etc/apt/sources.list"
-cp dist+filename, filename
-sh "apt-get update"
+# Specify list of apt repositories to use
+if cpdist("/etc/apt/sources.list")
+  # Use the new apt repositories if the list was updated
+  sh "apt-get update && apt-get dist-upgrade"
+end
