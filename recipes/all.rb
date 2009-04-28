@@ -18,7 +18,7 @@ invoke 'base_shmem'
 invoke 'base_firewall'
 invoke 'base_fail2ban'
 invoke 'base_sudo'
-invoke 'base_ssh_gateway'
+invoke 'base_ssh'
 invoke 'base_fuse'
 invoke 'base_exim'
 invoke 'base_cron_apt'
@@ -47,7 +47,11 @@ unless tagged?(:standby)
   invoke 'base_mysql'
   invoke 'base_apache'
   invoke 'base_php5'
-  invoke 'base_ruby_enterprise'
+  begin
+    invoke 'base_ruby_enterprise'
+  rescue
+    invoke 'base_ruby_enterprise_from_source'
+  end
   invoke 'base_passenger' # Relies on base_apache, base_ruby_enterprise
   invoke 'base_memcached'
 
@@ -61,5 +65,6 @@ unless tagged?(:standby)
   invoke 'my_bridgepdx_wiki' # Relies on my_bridgepdx_wordpress, my_apache, base_php5, base_mysql
   invoke 'my_bridgepdx_ocw' # Relies on my_apache, my_ruby, my_bridgepdx_user
   invoke 'my_bridgepdx_secrets' # Relies on my_apache, base_php5, my_bridgepdx_user
+  invoke 'my_bridgepdx_stats' # Relies on my_apache, base_php5, my_bridgepdx_user
   invoke 'my_reown'
 end
