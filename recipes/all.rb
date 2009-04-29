@@ -12,6 +12,7 @@ invoke 'base_gems' # Relies on base_ruby and base_rubygems
 invoke 'base_ruby_github'
 invoke 'base_locales'
 invoke 'base_shmem'
+invoke 'base_ubuntu_smbpass_fix'
 
 # Base system
 ## Security and networking
