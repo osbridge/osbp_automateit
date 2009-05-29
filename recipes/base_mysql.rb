@@ -18,5 +18,5 @@ mysql_manager.setup
 # Create accounts and grant privileges
 lookup("mysql#accounts").each_pair do |username, opts|
   mysql_manager.add_user(username, :password => opts["password"])
-  mysql_manager.grant_superuser(username) if opts["superuser"]
+  mysql_manager.grant_superuser(username, :password => opts["password"]) if opts["superuser"]
 end
