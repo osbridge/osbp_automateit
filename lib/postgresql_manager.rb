@@ -66,7 +66,7 @@ class PostgresqlManager
 
     # Calculate values
     self.postgresql_version = \
-      if self.interpreter.tagged? 'ubuntu_8.04'
+      if self.interpreter.tagged? 'ubuntu_8.04 | ubuntu_8.10 | ubuntu_9.04'
         '8.3'
       elsif self.interpreter.tagged? 'ubuntu_7.10'
         '8.2'
