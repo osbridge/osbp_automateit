@@ -10,6 +10,12 @@
     DocumentRoot /var/www/bridgepdx_wordpress
     ServerName bridgepdx.org
     ServerAlias www.bridgepdx.org bridgepdx bridgepdx.pragmaticraft.com opensourcebridge.org www.opensourcebridge.org
+    RewriteEngine On
+
+    # Logs
+    ErrorLog /var/log/apache2/bridgepdx_wordpress.error.log
+    TransferLog /var/log/apache2/bridgepdx_wordpress.access.log
+    CustomLog /var/log/apache2/bridgepdx_wordpress.referer.log "%{Referer}i -> %U"
 
     # Common stylesheets and images
     Alias /common /var/www/bridgepdx_common
@@ -24,17 +30,10 @@
     Alias /stats /var/www/bridgepdx_stats
 
     # Attendee wiki
-    RewriteEngine On
     RewriteRule ^/wiki/[sS]kins/(.*)$ /var/www/bridgepdx_wiki/skins/$1 [L,QSA]
     RewriteRule ^/wiki(/?.*)$ /var/www/bridgepdx_wiki/index.php?title=$1 [L,QSA]
 
-    # Logs
-    ErrorLog /var/log/apache2/bridgepdx_wordpress.error.log
-    TransferLog /var/log/apache2/bridgepdx_wordpress.access.log
-    CustomLog /var/log/apache2/bridgepdx_wordpress.referer.log "%{Referer}i -> %U"
-
     # Canonical hostname
-    RewriteEngine on
     RewriteCond %{HTTP_HOST} !^opensourcebridge.org [NC]
     RewriteCond %{HTTP_HOST} !^$
     RewriteRule ^/(.*) http://opensourcebridge.org/$1 [L,R]
