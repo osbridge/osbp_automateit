@@ -31,6 +31,7 @@
     # Logs
     ErrorLog /var/log/apache2/bridgepdx_wordpress.error.log
     TransferLog /var/log/apache2/bridgepdx_wordpress.access.log
+    CustomLog /var/log/apache2/bridgepdx_wordpress.referer.log "%{Referer}i -> %U"
 
     # Canonical hostname
     RewriteEngine on
