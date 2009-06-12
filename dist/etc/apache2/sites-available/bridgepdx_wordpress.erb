@@ -30,6 +30,7 @@
     Alias /stats /var/www/bridgepdx_stats
 
     # Attendee wiki
+    RewriteRule ^/wiki/api.php$ /var/www/bridgepdx_wiki/api.php [L,QSA]
     RewriteRule ^/wiki/[sS]kins/(.*)$ /var/www/bridgepdx_wiki/skins/$1 [L,QSA]
     RewriteRule ^/wiki(/?.*)$ /var/www/bridgepdx_wiki/index.php?title=$1 [L,QSA]
 
