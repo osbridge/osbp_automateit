@@ -25,5 +25,6 @@ cpdist("/var/www/bridgepdx_wiki/Rakefile")
 # Add task to dump database to file
 edit("/var/spool/cron/crontabs/#{user}", :create => true, :user => user, :group => "crontab", :mode => 0600) do
   append "# m h  dom mon dow   command"
-  append "17 * * * * (cd /var/www/bridgepdx_wiki && rake --silent dump)"
+  delete "17 * * * * (cd /var/www/bridgepdx_wiki && rake --silent dump)"
+  append "18 * * * * if test -f /var/www/bridgepdx_wiki/Rakefile; then (cd /var/www/bridgepdx_wiki && rake --silent dump); fi"
 end
