@@ -18,7 +18,7 @@
 #   mysql_manager.add_user("asdf", :host => "localhost", :password => "meh")
 #
 #   # Grant super user privileges to user "asdf" at "localhost"
-#   mysql_manager.grant_superuser("asdf", :host => "localhost")
+#   mysql_manager.grant_superuser("asdf", :host => "localhost", :password => "meh")
 #
 #   # Revoke superuser privileges from user "asdf" at "localhost"
 #   mysql_manager.revoke_superuser("asdf", :host => "localhost")
