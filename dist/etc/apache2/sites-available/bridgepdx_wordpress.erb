@@ -17,6 +17,11 @@
     TransferLog /var/log/apache2/bridgepdx_wordpress.access.log
     CustomLog /var/log/apache2/bridgepdx_wordpress.referer.log "%{Referer}i -> %U"
 
+    # Canonical hostname
+    RewriteCond %{HTTP_HOST} !^opensourcebridge.org [NC]
+    RewriteCond %{HTTP_HOST} !^$
+    RewriteRule ^/(.*) http://opensourcebridge.org/$1 [L,R]
+
     # Common stylesheets and images
     Alias /common /var/www/bridgepdx_common
 
@@ -36,11 +41,6 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^/wiki(/?.*)$ /var/www/bridgepdx_wiki/index.php?title=$1 [L,QSA]
-
-    # Canonical hostname
-    RewriteCond %{HTTP_HOST} !^opensourcebridge.org [NC]
-    RewriteCond %{HTTP_HOST} !^$
-    RewriteRule ^/(.*) http://opensourcebridge.org/$1 [L,R]
 
     # Proxy
     ProxyRequests off
