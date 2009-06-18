@@ -11,6 +11,7 @@ shmem:
 ## Used by "base_php5.rb"
 php5:
   memory_limit: "64M"
+  upload_max_filesize: "8M"
 
 ## Used by "base_passenger.rb"
 ### passenger:
