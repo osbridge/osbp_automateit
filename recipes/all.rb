@@ -13,6 +13,7 @@ invoke 'base_ruby_github'
 invoke 'base_locales'
 invoke 'base_shmem'
 invoke 'base_ubuntu_smbpass_fix'
+invoke 'base_locate'
 
 # Base system
 ## Security and networking
