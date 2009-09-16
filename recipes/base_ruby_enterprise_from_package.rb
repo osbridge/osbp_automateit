@@ -3,9 +3,9 @@
 # URL from distro site at http://www.rubyenterpriseedition.com/download.html
 url = \
   if tagged?('x86_64')
-    "http://www.rubyenterpriseedition.com/ruby-enterprise_1.8.6-20090610_amd64.deb"
+    "http://rubyforge.org/frs/download.php/58678/ruby-enterprise_1.8.6-20090610_amd64.deb"
   elsif tagged?('i386 | i486 | i586 | i686')
-    "http://www.rubyenterpriseedition.com/ruby-enterprise_1.8.6-20090610_i386.deb"
+    "http://rubyforge.org/frs/download.php/58679/ruby-enterprise_1.8.6-20090610_i386.deb"
   else
     raise NotImplementedError, "Unknown architecture"
   end
