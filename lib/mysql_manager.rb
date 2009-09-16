@@ -73,7 +73,6 @@ class MysqlManager
       # Tools
       libcompress-zlib-perl
       mytop
-      dbishell
 
       # Ruby drivers
       libmysql-ruby
