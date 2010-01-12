@@ -1,8 +1,5 @@
 # Setup a wiki for storing secrets.
 
-# You'll need to create an SSL certificate with a command like:
-### make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/ssl/certs/bridgepdx_secrets.pem
-
 certificate = "/etc/ssl/certs/bridgepdx_secrets.pem"
 if File.exist?(certificate)
   user = "bridgepdx"
@@ -13,4 +10,8 @@ if File.exist?(certificate)
   apache_manager.enable_module "ssl"
   modified = apache_manager.install_site(sitename)
   apache_manager.reload if modified
+else
+  puts <<EOB
+WARNING: Skipped "my_bridgepdx_secrets" recipe, couldn't find its SSL certificate. Restore the certificate from backups to "#{certificate}" or create a new one by running: make-ssl-cert /usr/share/ssl-cert/ssleay.cnf #{certificate} 
+EOB
 end
