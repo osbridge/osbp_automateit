@@ -22,6 +22,11 @@
     RewriteCond %{HTTP_HOST} !^$
     RewriteRule ^/(.*) http://opensourcebridge.org/$1 [L,R]
 
+    # WordPress's category, tag and top-level date-based article names
+    RedirectPermanent ^/category /blog/category
+    RedirectPermanent ^/tag /blog/tag
+    RewriteRule ^(2\d{3}/\d+/.+) /blog/$1 [R=301,L]
+
     # Common stylesheets and images
     Alias /common /var/www/bridgepdx_common
 
