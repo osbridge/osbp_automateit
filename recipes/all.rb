@@ -65,5 +65,6 @@ unless tagged?(:standby)
   invoke 'my_bridgepdx_secrets' # Relies on my_apache, base_php5, my_bridgepdx_user
   invoke 'my_bridgepdx_stats' # Relies on my_apache, base_php5, my_bridgepdx_user
   invoke 'my_bridgepdx_redmine' # Relies on my_apache, my_ruby, my_bridgepdx_user
+  invoke 'my_bridgepdx_etherpad' # Relies on my_apache, base_java, my_bridgepdx_user
   invoke 'my_reown'
 end
