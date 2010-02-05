@@ -8,6 +8,8 @@ package_manager.install <<-HERE
   time pcregrep
   man-db
   tofrodos
+  ncftp
+  lsof
 
   # Network tools
   rsync curl apache2-utils httperf host dnsutils
