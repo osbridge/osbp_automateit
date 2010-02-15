@@ -7,7 +7,7 @@ reown = "/usr/local/bin/reown"
 modified = cp dist+reown, reown, :user => "root", :group => "root", :mode => 0755
 
 edit "/etc/sudoers" do
-  append "%bridgepdx ALL = NOPASSWD: #{reown}"
+  append "%#{default_user} ALL = NOPASSWD: #{reown}"
 end
 
 edit("/var/spool/cron/crontabs/root", :create => true, :user => "root", :group => "crontab", :mode => 0600, :params => {:reown => reown}) do

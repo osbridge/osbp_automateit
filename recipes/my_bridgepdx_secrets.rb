@@ -2,10 +2,9 @@
 
 certificate = "/etc/ssl/certs/bridgepdx_secrets.pem"
 if File.exist?(certificate)
-  user = "bridgepdx"
   sitename = "bridgepdx_secrets"
   docroot = "/var/www/#{sitename}"
-  mkdir_p(docroot) && chown(user, user, docroot, :recursive => true)
+  mkdir_p(docroot) && chown(default_user, default_group, docroot, :recursive => true)
 
   apache_manager.enable_module "ssl"
   modified = apache_manager.install_site(sitename)
