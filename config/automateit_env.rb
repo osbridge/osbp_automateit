@@ -1,5 +1,7 @@
 # Put your environment commands here
 
+set :default_user, "bridgepdx"
+set :default_group, "bridgepdx"
 set :stow_dir, "/usr/local/stow"
 set :apache_manager, ApacheManager.new(self)
 set :mysql_manager, MysqlManager.new(self)
