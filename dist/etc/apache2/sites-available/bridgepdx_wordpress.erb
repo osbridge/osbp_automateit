@@ -44,12 +44,12 @@
     RewriteRule ^/wiki(/.*)?$ /2009/wiki$1 [L,R]
 
     # Attendee wiki's scripts
-    Alias /2009/w /var/www/bridgepdx_wiki
+    Alias /2009/w /var/www/bridgepdx_wiki_2009
 
     # Attendee wiki's pages
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^/2009/wiki(/.*)?$ /var/www/bridgepdx_wiki/index.php?title=$1 [L,QSA]
+    RewriteRule ^/2009/wiki(/.*)?$ /var/www/bridgepdx_wiki_2009/index.php?title=$1 [L,QSA]
 
     # Proxy
     ProxyRequests off
