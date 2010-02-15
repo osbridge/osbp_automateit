@@ -10,9 +10,9 @@ edit "/etc/sudoers" do
   append "%#{default_user} ALL = NOPASSWD: #{reown}"
 end
 
-edit("/var/spool/cron/crontabs/root", :create => true, :user => "root", :group => "crontab", :mode => 0600, :params => {:reown => reown}) do
+cronedit("root") do
   append "# m h  dom mon dow   command"
-  delete /#{params[:reown]}/
+  delete /#{reown}/
 end
 
 sh(reown) if modified

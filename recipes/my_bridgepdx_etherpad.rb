@@ -8,7 +8,7 @@ modified = apache_manager.install_site(sitename)
 apache_manager.reload if modified
 
 # Add task to import emails and dump database to file
-edit("/var/spool/cron/crontabs/#{default_user}", :create => true, :user => default_user, :group => "crontab", :mode => 0600) do
+cronedit(default_user) do
   append "# m h  dom mon dow   command"
   # Start the server on boot
   append "@reboot if test -f /var/www/bridgepdx_etherpad/Rakefile; then cd /var/www/bridgepdx_etherpad; rake --silent start; fi"

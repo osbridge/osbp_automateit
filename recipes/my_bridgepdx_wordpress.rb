@@ -43,7 +43,7 @@ apache_manager.reload if modified
 cpdist("/var/www/bridgepdx_wordpress/Rakefile")
 
 # Add task to dump database to file
-edit("/var/spool/cron/crontabs/#{default_user}", :create => true, :user => default_user, :group => "crontab", :mode => 0600) do
+cronedit(default_user) do
   append "# m h  dom mon dow   command"
   delete "17 * * * * if test -f /var/www/bridgepdx_wordpress/Rakefile; then (cd /var/www/bridgepdx_wordpress && rake --silent dump); fi"
   append "17 * * * * if test -f /var/www/bridgepdx_wordpress/wp-config.php; then (cd /var/www/bridgepdx_wordpress && rake --silent dump); fi"

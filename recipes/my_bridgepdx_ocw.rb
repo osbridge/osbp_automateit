@@ -28,7 +28,7 @@ modified = apache_manager.install_site(sitename)
 apache_manager.reload if modified
 
 # Add task to dump database to file
-edit("/var/spool/cron/crontabs/#{default_user}", :create => true, :user => default_user, :group => "crontab", :mode => 0600) do
+cronedit(default_user) do
   append "# m h  dom mon dow   command"
   append "19 * * * * if test -f /var/www/bridgepdx_ocw/current/Rakefile; then (cd /var/www/bridgepdx_ocw/current && rake RAILS_ENV=production --silent db:raw:dump FILE=/var/www/bridgepdx_ocw/shared/db/production.sql); fi"
 end

@@ -21,7 +21,7 @@ path = "usr/share/php/Auth"; cp(dist+path, "/"+path)
 cpdist("/var/www/bridgepdx_wiki/Rakefile")
 
 # Add task to dump database to file
-edit("/var/spool/cron/crontabs/#{default_user}", :create => true, :user => default_user, :group => "crontab", :mode => 0600) do
+cronedit(default_user) do
   append "# m h  dom mon dow   command"
   delete "17 * * * * (cd /var/www/bridgepdx_wiki && rake --silent dump)"
   delete "18 * * * * if test -f /var/www/bridgepdx_wiki/Rakefile; then (cd /var/www/bridgepdx_wiki && rake --silent dump); fi"
