@@ -52,6 +52,7 @@ unless tagged?(:standby)
   invoke 'base_ruby_enterprise'
   invoke 'base_passenger' # Relies on base_apache, base_ruby_enterprise
   invoke 'base_memcached'
+  invoke 'base_mediawiki'
 
   # Customizations
   invoke 'my_packages'
