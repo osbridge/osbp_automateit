@@ -13,7 +13,7 @@
 ## Directory for storing downloaded APT packages
 APT_CACHE_DIR=murad:/var/cache/apt/archives
 ## Directory with checkout of the OSBP AutomateIt project
-PROJECT_CHECKOUT_DIR=murad:/home/igal/workspace/bridge/osbp_automateit
+PROJECT_CHECKOUT_DIR=murad:/home/igal/workspace/osbp_automateit
 ## Directory with checkout of the AutomateIt source code
 AUTOMATEIT_CHECKOUT_DIR=murad:/home/igal/workspace/automateit/app
 
