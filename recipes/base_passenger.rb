@@ -23,7 +23,7 @@ unless pool_size
 end
 
 # Retrieve information about installed package
-version = `gem list passenger --local`[/ \((.+?)\)/, 1].split(', ').sort.last
+version = `gem list passenger --local`[/ \((.+?)\)/, 1].split(', ').map{|string| Gem::Version.new(string)}.sort.last
 gem_needs_prefix = `gem contents --help`.match(/--prefix/m)
 passenger_path = File.dirname(`gem contents passenger --version #{version} #{gem_needs_prefix ? '--prefix' : ''}`.split.first)
 ruby_path = nil
