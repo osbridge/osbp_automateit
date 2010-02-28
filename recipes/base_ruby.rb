@@ -8,6 +8,9 @@ package_manager.install <<-HERE
   rdoc1.8
   libxml-ruby
   libopenssl-ruby
+
+  libxml2-dev
+  libxslt1-dev
 HERE
 
 ln_sf '/usr/bin/irb1.8',  '/usr/bin/irb'
