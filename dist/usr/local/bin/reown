@@ -33,16 +33,18 @@ if ! [[ 0 == $UID ]]; then
 fi
 
 # Execute commands at low priority
-wrapper () {
+nicely () {
     #ionice -c 2 -n 7 -- nice -n 19 -- "$@"
     nice -n 19 -- "$@"
 }
 
 # Commands to execute
 ## Traditional UNIX-based permissions
-### wrapper chgrp -R bridgepdx "/var/www/bridgepdx"*
-### wrapper find "/var/www/bridgepdx"* -type d -exec chmod g+s {} \;
-### wrapper chmod -R g+rwX "/var/www/bridgepdx"*
+### nicely chown -R bridgepdx:bridgepdx "/var/www/bridgepdx"*
+### nicely find "/var/www/bridgepdx"* -type d -exec chmod g+s {} \;
+### nicely chmod -R g+rwX "/var/www/bridgepdx"*
+
 ## Contemporary ACL-based permissions
-wrapper setfacl -R -d -m g:bridgepdx:rwX "/var/www/bridgepdx"*
-wrapper setfacl -R    -m g:bridgepdx:rwX "/var/www/bridgepdx"*
+nicely setfacl -R -d -m g:bridgepdx:rwX "/var/www/bridgepdx"*
+nicely setfacl -R    -m g:bridgepdx:rwX "/var/www/bridgepdx"*
+nicely find "/var/www/bridgepdx"* -type d -exec chown bridgepdx:bridgepdx {} \;
