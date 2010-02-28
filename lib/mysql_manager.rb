@@ -65,7 +65,9 @@ class MysqlManager
 
   # Install MySQL server, client and libraries.
   def install_packages
-    return(interpreter.package_manager.install <<-HERE)
+    modified = false 
+    
+    modified |= interpreter.package_manager.install <<-HERE
       # Core
       mysql-server
       mysql-client
@@ -79,6 +81,13 @@ class MysqlManager
       libmysql-ruby
       libdbd-mysql-ruby
     HERE
+
+    modified |= interpreter.package_manager.install <<-HERE, :with => :gem
+      dbi
+      dbd-mysql
+    HERE
+
+    return modified
   end
 
   # Start and enable the MySQL server.
