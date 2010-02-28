@@ -96,7 +96,9 @@ class PostgresqlManager
 
   # Install PostgreSQL server, client and libraries
   def install_packages
-    return(self.interpreter.package_manager.install <<-HERE)
+    modified = false
+
+    modified |= self.interpreter.package_manager.install <<-HERE
       # PostgreSQL
       postgresql-#{self.postgresql_version}
       postgresql-client-#{self.postgresql_version}
@@ -110,6 +112,13 @@ class PostgresqlManager
       # Helpers
       oidentd
     HERE
+
+    modified |= interpreter.package_manager.install <<-HERE, :with => :gem
+      dbi
+      dbd-pg
+    HERE
+
+    return modified
   end
 
   # Edit "postgresql.conf" file.
@@ -161,7 +170,7 @@ class PostgresqlManager
     begin
       Gem.clear_paths rescue nil
       require 'dbi'
-      return self.dbh = DBI.connect("dbi:Pg:dbname=#{default_db}")
+      return self.dbh = DBI.connect("dbi:Pg:dbname=#{default_db}", Etc.getlogin)
     rescue DBI::OperationalError => e
       if self.interpreter.writing?
         raise e
@@ -182,7 +191,7 @@ class PostgresqlManager
         self.interpreter.log.info(PNOTE+"Granting superuser rights to root")
         return false
       elsif tried
-        raise e
+        raise Exception, "Couldn't create superuser: #{e.message}"
       else
         tried = true
         retry
