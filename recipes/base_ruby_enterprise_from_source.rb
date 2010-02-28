@@ -51,3 +51,5 @@ edit "/usr/local/lib/ruby/site_ruby/1.8/rubygems.rb" do
     buffer
   end
 end
+
+invoke 'base_ruby_enterprise_fix_gem_path'

@@ -5,4 +5,3 @@ if tagged?('i386 | i486 | i586 | i686 | x86_64')
 else
   invoke 'base_ruby_enterprise_from_source'
 end
-

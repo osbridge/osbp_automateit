@@ -6,6 +6,9 @@
 #     pool_size: 8
 #     max_instances: 6
 
+# TODO Update to package_manager with support for :version argument
+minimum_version = Gem::Version.new('2.2.10')
+
 modified = false
 modified |= package_manager.install "apache2-prefork-dev"
 modified |= package_manager.install "passenger", :with => :gem, :docs => false
@@ -23,7 +26,12 @@ unless pool_size
 end
 
 # Retrieve information about installed package
-version = `gem list passenger --local`[/ \((.+?)\)/, 1].split(', ').map{|string| Gem::Version.new(string)}.sort.last
+get_passenger_version = lambda { `gem list passenger --local`[/ \((.+?)\)/, 1].split(', ').map{|string| Gem::Version.new(string)}.sort.last }
+version = get_passenger_version[]
+if version < minimum_version
+  sh "gem install passenger --no-ri --no-rdoc --version '~> #{minimum_version}'" 
+  version = get_passenger_version[]
+end
 gem_needs_prefix = `gem contents --help`.match(/--prefix/m)
 passenger_path = File.dirname(`gem contents passenger --version #{version} #{gem_needs_prefix ? '--prefix' : ''}`.split.first)
 ruby_path = nil
