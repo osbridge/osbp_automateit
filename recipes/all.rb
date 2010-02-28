@@ -9,7 +9,6 @@ invoke 'base_apt'
 invoke 'base_ruby'
 invoke 'base_rubygems' # Relies on base_ruby
 invoke 'base_gems' # Relies on base_ruby and base_rubygems
-invoke 'base_ruby_github'
 invoke 'base_locales'
 invoke 'base_shmem'
 invoke 'base_ubuntu_smbpass_fix'
