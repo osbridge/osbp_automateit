@@ -75,6 +75,7 @@ class MysqlManager
       mytop
 
       # Ruby drivers
+      libmysqlclient15-dev
       libmysql-ruby
       libdbd-mysql-ruby
     HERE
