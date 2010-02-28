@@ -47,4 +47,4 @@ nicely () {
 ## Contemporary ACL-based permissions
 nicely setfacl -R -d -m g:bridgepdx:rwX "/var/www/bridgepdx"*
 nicely setfacl -R    -m g:bridgepdx:rwX "/var/www/bridgepdx"*
-nicely find "/var/www/bridgepdx"* -type d -exec chown bridgepdx:bridgepdx {} \;
+nicely find "/var/www/bridgepdx_ocw"* -type d -exec chown bridgepdx:bridgepdx {} \;
