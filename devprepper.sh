@@ -39,8 +39,8 @@ cat <<HERE
 
 # Mount project:
 which sshfs || apt-get install -y sshfs
-mkdir -p $project_target
 fusermount -u -z $project_target
+mkdir -p $project_target
 sshfs $host:$project_source $project_target
 HERE
 
@@ -48,8 +48,8 @@ if [[ -d $automateit_source ]]; then
 cat <<HERE
 
 # Mount AutomateIt source:
-mkdir -p $automateit_target
 fusermount -u -z $automateit_target
+mkdir -p $automateit_target
 sshfs $host:$automateit_source $automateit_target
 export PATH=$automateit_target/bin:\$PATH
 export RUBYLIB=$automateit_target/lib:\$RUBYLIB
