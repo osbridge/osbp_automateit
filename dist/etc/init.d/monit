@@ -68,9 +68,9 @@ monit_delayed_monitoring () {
 }
 
 monit_check_syntax () {
-  $DAEMON -t;
-  if ! [ $? ] ; then
-      echo "syntax bad, please edit $CONFIG"
+  if ! $DAEMON -t; then
+      echo  ERROR: The configuration file has a syntax error, please edit: $CONFIG
+      exit 1
   fi
 }
 
