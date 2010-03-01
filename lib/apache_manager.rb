@@ -1,3 +1,28 @@
+# Uses 'lib/pgrep'
+
+# = ApacheManager
+#
+# This class provides methods to manage an Apache instance.
+#
+# == Examples
+#
+#   # Instantiate using an instance of AutomateIt::Interpreter
+#   apache_manager = ApacheManager.new(self)
+#
+#   # Install Apache packages
+#   apache_manager.install
+#
+#   # Enable Apache to run at boot
+#   apache_manager.enable
+#
+#   # Enable a module called "passenger" and record if it had made a change
+#   modified |= apache_manager.enable_module "passenger"
+#
+#   # Install and enable a site called "mysite" (from "dist/etc/apache2/sites-available/mysite")
+#   modified |= apache_manager.install_site("mysite")
+#
+#   # Reload Apache, or start it if not running, if something was changed
+#   apache_manager.reload if modified
 class ApacheManager
   attr_accessor :interpreter
   attr_accessor :mod_extensions
@@ -142,8 +167,24 @@ class ApacheManager
     return modified
   end
 
-  # Reload Apache web server using "force-reload".
+  # Install Apache, enable it if needed, and start it if needed
+  def install
+    modified |= self.interpreter.package_manager.install <<-HERE
+      apache2
+      apache2-prefork-dev
+    HERE
+
+    modified |= self.interpreter.service_manager.enable(self.service)
+
+    self.reload if modified || ! self.interpreter.pgrep?(self.service)
+
+    return modified
+  end
+
+  # Reload Apache web server, or start it if it's not running
   def reload
-    return interpreter.service_manager.tell(self.service, "force-reload")
+    return self.interpreter.pgrep?(self.service) ?
+      self.interpreter.service_manager.tell(self.service, "force-reload") :
+      self.interpreter.service_manager.tell(self.service, "start")
   end
 end
