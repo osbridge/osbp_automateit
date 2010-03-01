@@ -10,5 +10,6 @@
 #   # Same thing with cpdist:
 #   cpdist(filename)
 def cpdist(filename, *args)
-  return cp(dist+filename, filename, *args)
+  # TODO improve #cp to do this on its own
+  return cp(File.expand_path(dist+filename), File.expand_path(filename), *args)
 end
