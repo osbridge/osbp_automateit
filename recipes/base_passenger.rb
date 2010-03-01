@@ -14,7 +14,9 @@
 passenger_version = Gem::Version.new('2.2.9')
 
 # Ruby to use in order of preference:
-ruby_basedirs = ["/opt/ruby-enterprise", "/usr/local", "/usr/bin"]
+ruby_basedirs = ["/opt/ruby-enterprise", "/usr/local", "/usr/bin"].select{|t| File.exist?(t)}
+ruby_interpreters = ruby_basedirs.map{|base| "#{base}/bin/ruby"}.select{|t| File.exist?(t)}
+ruby_interpreter = ruby_interpreters.first
 
 #---[ Logic ]-----------------------------------------------------------
 
@@ -24,10 +26,11 @@ if package_manager.installed?("passenger", :with => :gem)
   # What versions of Passenger are installed?
   versions = `gem list passenger --local`[/ \((.+?)\)/, 1].split(', ').map{|string| Gem::Version.new(string)}.sort
 
+  # Uninstall with all versions of gem since there are multiple ones :(
   unless versions.last == passenger_version
-    # TODO Why does `gem list passenger --local` claim 2.0.6 is present, yet `gem uninstall passenger -v 2.0.6` claim it's not?!
-    # TODO package_manager.uninstall("passenger", :with => :gem)
-    sh "gem uninstall passenger -x -a > /dev/null 2>&1"
+    for ruby_basedir in ruby_basedirs
+      sh "#{ruby_basedir}/bin/gem uninstall passenger -x -a > /dev/null 2>&1"
+    end
     modified = true
     passenger_needs_installing = true
   end
@@ -44,8 +47,6 @@ end
 # Determine what path Ruby is installed in
 gem_needs_prefix = `gem contents --help`.match(/--prefix/m)
 passenger_path = File.dirname(`gem contents passenger --version #{passenger_version} #{gem_needs_prefix ? '--prefix' : ''}`.split.first)
-ruby_path = ruby_basedirs.map{|base| "#{base}/bin/ruby"}.find{|path| File.exist?(path)}
-raise "Can't find Ruby's path" unless ruby_path
 
 # Compile Passenger if needed
 passenger_so = "#{passenger_path}/ext/apache2/mod_passenger.so"
@@ -69,7 +70,7 @@ end
 modified |= render :text => <<-HERE, :to => "/etc/apache2/mods-available/passenger.load"
 LoadModule passenger_module #{passenger_so}
 PassengerRoot               #{passenger_path}
-PassengerRuby               #{ruby_path}
+PassengerRuby               #{ruby_interpreter}
 PassengerMaxPoolSize        #{pool_size}
 #{max_instances ? 'PassengerMaxInstancesPerApp %i' % max_instances : ''}
 HERE
