@@ -13,6 +13,9 @@ modified = package_manager.install 'monit'
 # Install configuration file
 modified |= cp source_monitrc, target_monitrc, :mode => 0444
 
+# Install init file, because default doesn't check syntax
+modified |= cpdist("/etc/init.d/monit", :mode => 0555)
+
 # Enable startup
 modified |= \
   edit :file => "/etc/default/monit" do
