@@ -4,7 +4,7 @@ package_manager.install "acl"
 
 reown = "/usr/local/bin/reown"
 
-modified = cp dist+reown, reown, :user => "root", :group => "root", :mode => 0755
+modified = cpdist reown, :user => "root", :group => "root", :mode => 0755
 
 edit "/etc/sudoers" do
   append "%#{default_user} ALL = NOPASSWD: #{reown}"

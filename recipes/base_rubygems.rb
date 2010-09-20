@@ -23,6 +23,6 @@ end
 ln_sf("/usr/bin/gem1.8", "/usr/bin/gem")
 
 gemrc = "/root/.gemrc"
-cp dist+gemrc, gemrc
+cpdist gemrc
 
 invoke 'base_ruby_enterprise_fix_gem_path'

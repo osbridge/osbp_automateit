@@ -5,5 +5,5 @@ aiupgrade = "/usr/local/bin/aiupgrade"
 options  = {:mode => 555, :user => "root", :group => "root"}
 
 for filename in [aiapply, aiupgrade]
-  cp(dist+filename, filename, options)
+  cpdist filename, options
 end

@@ -8,5 +8,4 @@ package_manager.install <<-HERE
 HERE
 
 # Install PHP OpenID library, downloaded from http://openidenabled.com/php-openid/
-path = "usr/share/php/Auth"; cp(dist+path, "/"+path)
-
+cpdist "/usr/share/php/Auth"

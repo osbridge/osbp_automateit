@@ -4,7 +4,7 @@
 penwrap_service = "penwrap"
 package_manager.install "pen"
 penwrap = "/etc/init.d/#{penwrap_service}"
-cp(dist+penwrap, penwrap)
+cpdist penwrap
 
 if tagged?(:standby)
   # Shutoff apache, but only if it's already enabled
