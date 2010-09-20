@@ -21,9 +21,8 @@ package_fqfn = File.join(package_dir, package)
 if desired_version != current_version
   cd package_dir do
     download url unless File.exists?(package)
-    # TODO add package_manager :force? or versioning logic?
-    #IK# package_manager.install({"ruby-enterprise" => package_fqfn}, :with => :dpkg)
-    sh "export DEBIAN_FRONTEND=noninteractive; dpkg --install --skip-same-version #{package_fqfn} < /dev/null 2>&1"
+    package_manager.uninstall("ruby-enterprise")
+    package_manager.install({"ruby-enterprise" => package_fqfn}, :with => :dpkg)
   end
 end
 
