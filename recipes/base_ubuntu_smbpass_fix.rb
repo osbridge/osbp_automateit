@@ -9,16 +9,10 @@
 
 files = [ '/etc/pam.d/common-password', '/etc/pam.d/common-auth' ]
 
-if package_manager.installed?('libpam-smbpass')
-  for file in files
-    edit file do
-      comment /pam_smbpass.so/
-    end
-  end
-else
-  for file in files
-    edit file do
-      comment /pam_smbpass.so/
-    end
+command = package_manager.installed?('libpam-smbpass') ? 'uncomment' : 'comment'
+
+for file in files
+  edit file do
+    send(command, /pam_smbpass.so/)
   end
 end
