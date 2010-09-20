@@ -2,6 +2,8 @@
 #
 # NOTE: You must create a "dist/etc/monit/monitrc" file to install Monit. A
 # sample is available as "dist/etc/monit/monitrc.sample"
+#
+# NOTE: Relies on "lib/pgrep.rb"
 
 target_monitrc = "/etc/monit/monitrc"
 source_monitrc = dist+target_monitrc
@@ -24,8 +26,7 @@ modified |= \
 
 # Run service
 if modified
-  #IK# if pmatch? :name => :monit
-  if not `ps -ef | grep monit| grep -v grep`.blank?
+  if pgrep?(:monit)
     service_manager.tell :monit, "force-reload"
   else
     service_manager.start :monit
