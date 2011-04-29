@@ -9,7 +9,6 @@ apache_manager.reload if modified
 
 # Add task to import emails and dump database to file
 cronedit(default_user) do
-  append "# m h  dom mon dow   command"
   # Start the server on boot
   append "@reboot if test -f /var/www/bridgepdx_etherpad/Rakefile; then cd /var/www/bridgepdx_etherpad; rake --silent start; fi"
   # Backup the database to a file

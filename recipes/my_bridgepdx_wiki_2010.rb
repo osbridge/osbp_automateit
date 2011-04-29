@@ -7,7 +7,6 @@ mkdir_p(sitedir) and chperm(sitedir, :user => default_user, :group => default_gr
 
 # Add task to dump database to file
 cronedit(default_user) do
-  append "# m h  dom mon dow   command"
   append "18 * * * * if test -f #{sitedir}/LocalSettings.php; then (cd #{sitedir} && rake --silent dump); fi"
 end
 

@@ -29,6 +29,5 @@ apache_manager.reload if modified
 
 # Add task to dump database to file
 cronedit(default_user) do
-  append "# m h  dom mon dow   command"
   append "19 * * * * if test -f /var/www/bridgepdx_ocw/current/Rakefile; then (cd /var/www/bridgepdx_ocw/current && rake RAILS_ENV=production --silent db:raw:dump FILE=/var/www/bridgepdx_ocw/shared/db/production.sql); fi"
 end
