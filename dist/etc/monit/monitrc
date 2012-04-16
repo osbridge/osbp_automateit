@@ -14,8 +14,8 @@ set httpd port 2812 and use address localhost
     allow admin:monit
 
 check system localhost
-    if loadavg(1m) > 4 then alert
-    if loadavg(5m) > 2 then alert
+    if loadavg(1m) > 4 then exec "/usr/bin/top -b -n1 | /usr/bin/mail -s '1m load average too high' root"
+    if loadavg(5m) > 2 then exec "/usr/bin/top -b -n1 | /usr/bin/mail -s '5m load average too high' root"
     if memory usage > 90% then exec "/usr/bin/top -b -n1 | /usr/bin/mail -s 'Available memory too low' root"
 
 check device rootfs with path /
