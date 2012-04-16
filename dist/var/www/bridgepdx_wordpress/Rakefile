@@ -34,6 +34,7 @@ end
 
 desc "Restore database from a FILE"
 task :restore do
+  sh "echo 'CREATE DATABASE IF NOT EXISTS #{credentials.database}' | mysql #{credentials_for_cli :database => false}"
   sh "mysql #{credentials_for_cli} < #{sql_filename}", :verbose => true
 end
 
@@ -42,8 +43,11 @@ task :credentials do
   p credentials_for_cli
 end
 
-def credentials_for_cli
-   return "--user=#{credentials.user} --password=#{credentials.password} --host=#{credentials.host} #{credentials.database}"
+def credentials_for_cli(opts={})
+  result = "--user=#{credentials.user} --password=#{credentials.password}"
+  result << " --host=#{credentials.host}" if credentials.host
+  result << " #{credentials.database}" unless opts[:database] == false
+  return result
 end
 
 def credentials
