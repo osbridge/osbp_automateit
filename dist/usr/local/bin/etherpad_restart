@@ -1,6 +1,8 @@
 #!/bin/sh
 
-su -c 'cd /var/www/bridgepdx_etherpad/; /usr/local/bin/rake stop || true; /usr/local/bin/rake start' bridgepdx >> /var/log/etherpad.log 2>&1
-rm -f /var/www/bridgepdx_etherpad/src/etherpad/trunk/etherpad/core.*
-sleep 2
-/etc/init.d/apache2 restart
+if test -f /var/www/bridgepdx_etherpad/Rakefile; then
+    su -c 'cd /var/www/bridgepdx_etherpad/; /usr/local/bin/rake stop || true; /usr/local/bin/rake start' bridgepdx >> /var/log/etherpad.log 2>&1
+    rm -f /var/www/bridgepdx_etherpad/src/etherpad/trunk/etherpad/core.*
+    sleep 2
+    /etc/init.d/apache2 restart
+fi
