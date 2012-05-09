@@ -39,21 +39,17 @@
     # Stats
     Alias /stats /var/www/bridgepdx_stats
 
-    # Attendee wiki redirect
-    RewriteRule ^/w(/.*)?$ /2011/w$1 [L,R]
-    RewriteRule ^/wiki(/.*)?$ /2011/wiki$1 [L,R]
-
-    # Attendee wiki's scripts
-    Alias /2009/w /var/www/bridgepdx_wiki_2009
-    Alias /2010/w /var/www/bridgepdx_wiki_2010
-    Alias /2011/w /var/www/bridgepdx_wiki_2011
-
-    # Attendee wiki's pages
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^/2009/wiki(/.*)?$ /var/www/bridgepdx_wiki_2009/index.php?title=$1 [L,QSA]
-    RewriteRule ^/2010/wiki(/.*)?$ /var/www/bridgepdx_wiki_2010/index.php?title=$1 [L,QSA]
-    RewriteRule ^/2011/wiki(/.*)?$ /var/www/bridgepdx_wiki_2011/index.php?title=$1 [L,QSA]
+    ### Unified MediaWiki
+    # Redirect old pages
+    RewriteRule ^/(\d{4})/wiki(/.*)?$ /wiki/$1$2 [L,R]
+    # Redirect base requests
+    RewriteRule ^/wiki/?$ /wiki/Main_Page [R]
+    # Redirect year requests
+    RewriteRule ^/wiki/(\d{4})/?$ /wiki/$1/Main_Page [R]
+    # Render pages
+    RewriteRule ^/wiki/(.+)$ /var/www/bridgepdx_wiki/index.php?title=$1 [L,QSA]
+    # Serve API requests
+    RewriteRule ^/wiki-raw/(.+)$ /var/www/bridgepdx_wiki/$1 [L,QSA]
 
     # Proxy
     ProxyRequests off
