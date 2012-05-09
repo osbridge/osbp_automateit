@@ -19,7 +19,7 @@ check system localhost
     if memory usage > 90% then exec "/usr/bin/top -b -n1 | /usr/bin/mail -s 'Available memory too low' root"
 
 check device rootfs with path /
-    if space usage > 85% then alert
+    if space usage > 90% then alert
 
 check host osb_etherpad with address opensourcebridge.org
   if failed url http://opensourcebridge.org:9000/sample-page and content == "Public Pad"
