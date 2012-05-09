@@ -20,3 +20,7 @@ check system localhost
 
 check device rootfs with path /
     if space usage > 85% then alert
+
+check host osb_etherpad with address opensourcebridge.org
+  if failed url http://opensourcebridge.org:9000/sample-page and content == "Public Pad"
+    timeout 10 seconds then exec "/usr/local/bin/etherpad_restart"
